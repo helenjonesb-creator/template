@@ -1,0 +1,474 @@
+{
+  "content": [
+    {
+      "id": "41408bf7",
+      "settings": {
+        "flex_direction": "row",
+        "flex_gap": {
+          "unit": "px",
+          "size": 0,
+          "column": "0",
+          "row": "0"
+        },
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": {
+          "unit": "px",
+          "top": "0",
+          "right": "0",
+          "bottom": "0",
+          "left": "0",
+          "isLinked": true
+        },
+        "padding_tablet": {
+          "unit": "px",
+          "top": "0",
+          "right": "33",
+          "bottom": "0",
+          "left": "33",
+          "isLinked": false
+        },
+        "padding_mobile": {
+          "unit": "px",
+          "top": "0",
+          "right": "33",
+          "bottom": "40",
+          "left": "33",
+          "isLinked": false
+        },
+        "background_overlay_background": "classic",
+        "background_overlay_image": {
+          "url": "https:\/\/expresscoloradotransportation.com\/wp-content\/uploads\/2025\/08\/professional-Denver-airport-shuttle-service.png",
+          "id": 21250,
+          "size": "",
+          "alt": "",
+          "source": "library"
+        },
+        "background_overlay_opacity": {
+          "unit": "px",
+          "size": 0.15,
+          "sizes": [
+            
+          ]
+        },
+        "__globals__": {
+          "background_color": ""
+        }
+      },
+      "elements": [
+        {
+          "id": "3fa3c4ed",
+          "settings": {
+            "flex_direction": "column",
+            "content_width": "full",
+            "width": {
+              "unit": "%",
+              "size": 44.77
+            },
+            "border_border": "solid",
+            "border_width": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "2",
+              "isLinked": false
+            },
+            "border_width_mobile": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": true
+            },
+            "border_color": "#E85331",
+            "margin": {
+              "unit": "px",
+              "top": "30",
+              "right": "0",
+              "bottom": "30",
+              "left": "40",
+              "isLinked": false
+            },
+            "margin_mobile": {
+              "unit": "px",
+              "top": "40",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "padding": {
+              "unit": "px",
+              "top": "40",
+              "right": "0",
+              "bottom": "40",
+              "left": "40",
+              "isLinked": false
+            },
+            "padding_tablet": {
+              "unit": "px",
+              "top": "40",
+              "right": "0",
+              "bottom": "40",
+              "left": "40",
+              "isLinked": false
+            },
+            "padding_mobile": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_flex_align_self": "center",
+            "_flex_size": "none",
+            "_element_width": "initial"
+          },
+          "elements": [
+            {
+              "id": "73268e04",
+              "settings": {
+                "editor": "<h2><strong><span style=\"color: #000000;\">Beaver Creek Transportation That Gets Ski Season Right <\/span><\/strong><\/h2><p><strong><span style=\"color: #000000;\">Former resort supervisor shares real insights about reliable Beaver Creek transportation from years managing worker logistics and ski season challenges.<\/span><\/strong><\/p>"
+              },
+              "elements": [
+                
+              ],
+              "isInner": false,
+              "widgetType": "text-editor",
+              "elType": "widget"
+            }
+          ],
+          "isInner": true,
+          "elType": "container"
+        },
+        {
+          "id": "6754d0cd",
+          "settings": {
+            "content_width": "full",
+            "background_background": "classic",
+            "background_image": {
+              "url": "",
+              "id": "",
+              "size": "",
+              "alt": "",
+              "source": "library"
+            },
+            "background_size": "cover"
+          },
+          "elements": [
+            {
+              "id": "1ce85602",
+              "settings": {
+                "shortcode": "[gravityform id=\"30\" title=\"true\"]",
+                "_background_background": "classic",
+                "_background_image": {
+                  "url": "",
+                  "id": "",
+                  "size": "",
+                  "alt": "",
+                  "source": "library"
+                }
+              },
+              "elements": [
+                
+              ],
+              "isInner": false,
+              "widgetType": "shortcode",
+              "elType": "widget"
+            }
+          ],
+          "isInner": true,
+          "elType": "container"
+        }
+      ],
+      "isInner": false,
+      "elType": "container"
+    },
+    {
+      "id": "5a540d46",
+      "settings": {
+        "flex_direction": "column"
+      },
+      "elements": [
+        {
+          "id": "1e8925f4",
+          "settings": {
+            "editor": "<h2>Beaver Creek Transportation That Gets Ski Season Right<\/h2><p>Early December 2019, I had 18 maintenance crew members scheduled to arrive at Beaver Creek by 6 AM for opening day preparations. Three different transportation services failed to show up because of an overnight snowfall. Not heavy snow - maybe four inches. But enough to reveal which companies actually understood mountain resort operations versus those just taking bookings during ski season. That morning taught me everything about Beaver Creek transportation that eight years of coordinating worker logistics had been building toward. When you're responsible for getting people to work reliably at one of Colorado's most exclusive ski destinations, you learn fast which transportation services understand mountain operations and which ones just market to tourists hoping for easy money. During my time as maintenance crew supervisor, I coordinated transportation for seasonal workers living everywhere from Aurora to Silverthorne. These folks needed to reach Beaver Creek consistently for 6 AM shifts, regardless of weather, holiday traffic, or powder day chaos. You discover real quick that <a href=\"https:\/\/expresscoloradotransportation.com\/denver-airport-to-beaver-creek-transportation\/\">professional transportation to Beaver Creek<\/a> requires more than nice vehicles and marketing promises. Here's what surprised me most about resort transportation during those years. The companies charging premium prices for \"luxury\" service often disappeared during the exact conditions when reliable transportation mattered most. Meanwhile, the services that understood mountain resort operations showed up consistently, even when conditions got challenging.<\/p><div><img src=\"https:\/\/expresscoloradotransportation.com\/wp-content\/uploads\/2025\/08\/professional-airport-car-Denver-metro-transfer-768x512.png\" alt=\"\" \/><\/div><h2>Resort timing reality versus tourist expectations<\/h2><p>Most visitors think about Beaver Creek transportation in terms of comfortable travel between airport and resort. That works fine for leisure travelers with flexible schedules. But resort operations revealed timing requirements that separate reliable mountain transportation from companies just hoping weather stays perfect. Beaver Creek sits at 8,100 feet elevation in the heart of the Vail Valley. Weather changes fast, and I-70 traffic patterns shift dramatically based on conditions, construction, and seasonal demand. During my supervisor years, I learned that reliable Beaver Creek shuttle service meant companies that understood these variables and planned accordingly. Morning shift transportation taught me the most about service reliability. Getting maintenance crews to Beaver Creek by 6 AM required pickup times as early as 4:30 AM from Denver area locations. Tourist-focused companies typically don't operate those hours. Resort operations companies understand that mountain destinations require transportation services designed around actual operational needs, not just convenient schedules. I tracked transportation timing obsessively because late arrivals affected entire resort preparation schedules. <a href=\"https:\/\/expresscoloradotransportation.com\/denver-airport-to-beaver-creek-transportation\/\">Denver airport to Beaver Creek transportation<\/a> typically takes 2 hours and 15 minutes in perfect conditions. Add 45 minutes during construction season. Add 1-2 hours during holiday periods or storm conditions. Companies that quoted unrealistic timing caused operational problems.<\/p><h2>Equipment requirements beyond marketing photos<\/h2><p>Eight years of coordinating worker transportation taught me that vehicle capability matters more for Beaver Creek access than most services advertise. Marketing shows luxury sedans on perfect highways. Reality involves navigating icy resort access roads, unplowed employee parking areas, and equipment transport requirements that reveal vehicle limitations. All-wheel drive isn't negotiable for reliable Beaver Creek transportation. I've coordinated rescue situations for workers whose ride services got stuck on resort access roads because their vehicles lacked proper traction systems. Beaver Creek's elevation and mountain location mean ice and snow conditions that standard urban vehicles simply cannot handle safely. During my maintenance years, I noticed that professional mountain transportation companies invested in vehicles specifically designed for Colorado resort operations. Suburbans, Tahoes, and similar SUVs with ground clearance, weight distribution, and traction control appropriate for actual mountain driving conditions. Sedans might work in perfect weather, but resort operations require consistent access regardless of conditions. Equipment transport capability revealed another difference between tourist services and resort operation companies. Maintenance crews carried tools, safety equipment, and seasonal gear that required cargo space beyond typical passenger transportation. <a href=\"https:\/\/expresscoloradotransportation.com\/colorado-mountain-resort-transportation\/\">Reliable Beaver Creek transportation<\/a> meant services equipped to handle both passenger and equipment requirements.<\/p><div><img src=\"https:\/\/expresscoloradotransportation.com\/wp-content\/uploads\/2025\/08\/airport-transportation-Denver-suburbs-768x513.png\" alt=\"\" \/><\/div><h2>Weather management that actually works<\/h2><p>Resort maintenance operations don't shut down because of weather. Equipment needs repair, lifts require daily safety inspections, and snow removal operations increase during storms. This taught me which transportation companies understood mountain weather management versus those that cancelled service at first sign of difficulty. I remember a Presidents Day weekend when a surprise storm dropped 14 inches overnight. Half the scheduled transportation services cancelled by 5 AM. The other half showed up with proper equipment and experienced drivers who understood mountain storm driving. Professional Beaver Creek transportation means companies that maintain operations during the exact conditions when transportation becomes most critical. Mountain weather monitoring separates reliable services from fair-weather companies. Professional transportation companies track weather continuously and adjust operations proactively. During my supervisor years, I learned to trust services that communicated weather-related timing changes rather than those operating on fixed schedules regardless of conditions. Winter driving experience shows in how companies handle elevation changes, negotiate icy access roads, and manage vehicle equipment for varying conditions. I've coordinated situations where inexperienced drivers attempted Beaver Creek access without proper preparation and required assistance from resort security. <a href=\"https:\/\/expresscoloradotransportation.com\/mountain-ski-transportation\/\">Mountain transportation professionals<\/a> understand equipment requirements and route management for Colorado resort operations.<\/p><h2>Cost realities from operational budgets<\/h2><p>Managing transportation budgets for 40+ seasonal workers taught me the real cost structure of reliable Beaver Creek transportation. Resort operational budgets don't accommodate luxury pricing, but they require absolute reliability. This revealed which services provided genuine value versus those charging premium prices for marketing promises. Private transportation to Beaver Creek typically ranges from $280 to $420 for standard SUV service from Denver area locations, depending on pickup location and scheduling requirements. Holiday and peak period rates add $75 to $150 to base pricing. Luxury upgrades can double costs without necessarily improving mountain driving capability or operational reliability. Group transportation costs become significant for resort operations or family travel. <a href=\"https:\/\/expresscoloradotransportation.com\/denver-airport-to-beaver-creek-transportation\/\">Beaver Creek shuttle services<\/a> for multiple passengers range from $140 to $220 per person for shared transportation, or $650 to $950 for private group vehicles accommodating 6-10 passengers with equipment. During my budget management years, I learned that higher transportation costs often reflected better equipment, experienced mountain drivers, and companies maintaining service during challenging conditions. Cheaper services frequently proved unreliable during peak demand periods when resort operations required guaranteed transportation.<\/p><div><img src=\"https:\/\/expresscoloradotransportation.com\/wp-content\/uploads\/2025\/08\/professional-vehicle-service-Denver-airport-768x432.png\" alt=\"\" \/><\/div><h2>Driver experience that shows immediately<\/h2><p>Resort operations revealed the difference between drivers familiar with mountain routes and those just following GPS directions to Beaver Creek. Professional mountain driving requires understanding of elevation impacts, traffic patterns, alternative routes, and resort access procedures that experience provides. Experienced Beaver Creek drivers know alternative routes when I-70 experiences delays or closures. Highway 6 through Clear Creek Canyon becomes critical during tunnel closures. Loveland Pass remains accessible when Eisenhower Tunnel closes to high-profile vehicles. During resort operations, I worked with drivers who understood these options versus those completely dependent on primary route availability. Mountain resort access requires local knowledge that GPS systems don't provide. Beaver Creek has multiple entry points, different access procedures for various destinations within the resort area, and parking protocols that vary by season and event schedules. <a href=\"https:\/\/expresscoloradotransportation.com\/denver-corporate-transportation\/\">Professional transportation drivers<\/a> understand these requirements through experience rather than attempting navigation in real-time. What impressed me about experienced mountain transportation drivers was their communication about conditions, timing, and route decisions. They explained weather situations, traffic alternatives, and operational considerations. During resort coordination, this communication helped workers understand schedule adjustments and arrival timing changes.<\/p><h2>Service reliability during peak demand<\/h2><p>Resort operations revealed transportation company reliability during the exact periods when most services become unreliable. Powder days, holiday weekends, and storm conditions separate companies designed for mountain resort operations from those targeting easy tourist transportation during perfect conditions. Peak demand reliability became critical during Presidents Day weekend, Martin Luther King weekend, and other high-traffic periods when transportation demand exceeded most companies' actual operational capability. I learned to trust services that maintained consistent operations during peak periods rather than those accepting bookings they couldn't fulfill reliably. Professional mountain transportation companies plan for peak demand rather than hoping conditions remain manageable. During my coordination years, I noticed that reliable services maintained spare vehicle capacity, driver reserves, and operational flexibility for handling unexpected demand or equipment issues. <a href=\"https:\/\/expresscoloradotransportation.com\/services\/\">Express Colorado Transportation<\/a> type companies demonstrated this operational depth through consistent performance during challenging periods.<\/p><h2>Booking strategies that prevent operational problems<\/h2><p>Eight years of coordinating resort worker transportation taught me booking approaches that ensure reliable Beaver Creek transportation service. Resort operations require transportation that functions consistently rather than creating scheduling problems or operational delays. Advanced booking requirements during ski season often exceed tourist expectations. Peak period transportation to Beaver Creek frequently books completely full 2-3 weeks in advance. Last-minute availability becomes extremely limited and significantly more expensive during holiday periods and powder conditions. Weather contingency planning should be established during initial booking discussions. Professional companies explain policies for weather delays, route changes, and operational adjustments. During resort coordination, I learned that services with clear weather communication and flexible operational procedures provided better reliability during challenging conditions. Multiple pickup coordination requires careful planning for resort group transportation. Collecting passengers from different Denver area locations, airports, or accommodations adds substantial complexity and timing requirements. <a href=\"https:\/\/expresscoloradotransportation.com\/denver-airport-to-beaver-creek-transportation\/\">Group transportation to Beaver Creek<\/a> works best when pickup logistics are planned efficiently rather than attempting complex routing in real-time.<\/p><h2>Resort access knowledge that matters<\/h2><p>Beaver Creek resort access involves considerations that standard transportation services often don't understand. Resort operations taught me which companies had genuine Beaver Creek experience versus those just adding mountain destinations to their service list. Resort entry procedures vary by season, events, and destination within Beaver Creek. Village access differs from ski area access. Employee areas require different navigation than guest areas. Conference facilities have separate arrival procedures from hotel destinations. Professional Beaver Creek transportation means drivers familiar with these operational details through experience. Parking and drop-off protocols change based on resort activity levels and seasonal operations. Peak period drop-off procedures differ from off-season protocols. Event periods require modified arrival procedures. During resort coordination, I learned that experienced transportation services understood these variables and planned accordingly. Equipment and luggage handling for Beaver Creek transportation requires understanding resort logistics. Ski equipment storage, conference materials transport, and group luggage coordination need proper planning. Resort operations revealed which companies had appropriate vehicle configurations and handling procedures for various transportation requirements.<\/p><div><img src=\"https:\/\/expresscoloradotransportation.com\/wp-content\/uploads\/2025\/08\/luxury-shuttle-Denver-foothills-transfer-768x513.png\" alt=\"\" \/><\/div><h2>What works based on operational experience<\/h2><p>After eight years coordinating transportation for resort operations, here's what I learned about choosing Beaver Creek transportation that delivers consistent, reliable service under actual mountain conditions. Operational reliability matters more than luxury marketing. Choose companies demonstrating consistent service during challenging conditions rather than those emphasizing vehicle amenities or premium pricing. Resort operations require transportation that functions reliably regardless of weather, traffic, or seasonal demand pressures. Mountain driving experience shows in operational details. Professional drivers discuss route options, explain weather considerations, and communicate timing adjustments based on actual conditions. They understand resort access procedures, elevation impacts, and alternative route management through experience rather than real-time problem-solving. Equipment capability appropriate for mountain resort operations. Vehicles designed for Colorado mountain conditions with proper traction systems, ground clearance, and cargo capacity for various transportation requirements. <a href=\"https:\/\/expresscoloradotransportation.com\/denver-airport-to-beaver-creek-transportation\/\">Beaver Creek transportation services<\/a> that understand resort operational needs rather than just tourist transportation. Service consistency during peak demand periods. Companies maintaining reliable operations during holiday weekends, powder conditions, and high-traffic periods when transportation becomes most critical. Professional mountain transportation means services designed for peak operational demands rather than hoping conditions remain manageable. My resort coordination experience taught me that reliable Beaver Creek transportation requires companies understanding mountain resort operations rather than urban services attempting mountain routes. The operational requirements reveal which companies have genuine mountain transportation capability versus those just marketing to ski season tourists.<\/p>"
+          },
+          "elements": [
+            
+          ],
+          "isInner": false,
+          "widgetType": "text-editor",
+          "elType": "widget"
+        }
+      ],
+      "isInner": false,
+      "elType": "container"
+    },
+    {
+      "id": "4d425dc0",
+      "settings": {
+        "flex_direction": "column"
+      },
+      "elements": [
+        {
+          "id": "643b6c1f",
+          "settings": {
+            "title": "RATES BREAKDOWN",
+            "tabs": [
+              {
+                "title": "FLAT RATE DIA (Denver Airport) From\/To",
+                "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>IME Denver Pricing Table<\/title>\n    <style>\n        \/* IME Denver Pricing Table - Clean Layout *\/\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: Arial, sans-serif;\n            background: #f8f9fa;\n            padding: 20px;\n        }\n\n        .ime-pricing-table-wrapper {\n            width: 100%;\n            max-width: 1200px;\n            margin: 20px auto;\n        }\n\n        .ime-pricing-container {\n            background: white;\n            border-radius: 10px;\n            overflow: hidden;\n            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);\n        }\n\n        .ime-title-section {\n            text-align: center;\n            padding: 30px 20px;\n            background: white;\n        }\n\n        .ime-main-title {\n            font-size: 28px;\n            font-weight: bold;\n            color: #2c3e50;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n            margin: 0;\n        }\n\n        .ime-pricing-table {\n            width: 100%;\n        }\n\n        .ime-header-row {\n            display: grid;\n            grid-template-columns: 2fr repeat(4, 1fr);\n        }\n\n        .ime-vehicle-header {\n            background: white;\n            padding: 20px 10px;\n        }\n\n        .ime-destination-header {\n            padding: 20px 10px;\n            text-align: center;\n            background: #e74c3c;\n            border-left: 1px solid rgba(255, 255, 255, 0.2);\n        }\n\n        .ime-destination-header h4 {\n            margin: 0;\n            font-size: 14px;\n            font-weight: bold;\n            color: white;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n            line-height: 1.3;\n        }\n\n        .ime-vehicle-row {\n            display: grid;\n            grid-template-columns: 2fr repeat(4, 1fr);\n            border-bottom: 1px solid #eee;\n            min-height: 100px;\n            align-items: center;\n            transition: background-color 0.3s ease;\n        }\n\n        .ime-vehicle-row:hover {\n            background: #f8f9fa;\n        }\n\n        .ime-vehicle-row:last-child {\n            border-bottom: none;\n        }\n\n        .ime-vehicle-info {\n            display: flex;\n            align-items: center;\n            padding: 20px;\n            gap: 20px;\n        }\n\n        .ime-vehicle-img {\n            width: 120px;\n            height: 80px;\n            object-fit: cover;\n            border-radius: 5px;\n            flex-shrink: 0;\n        }\n\n        .ime-vehicle-details h4 {\n            margin: 0;\n            font-size: 16px;\n            font-weight: bold;\n            color: #2c3e50;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n            line-height: 1.4;\n        }\n\n        .ime-price-cell {\n            padding: 20px 10px;\n            text-align: center;\n            border-left: 1px solid #eee;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            transition: background-color 0.3s ease;\n        }\n\n        .ime-price-cell:hover {\n            background: #f1f8ff;\n        }\n\n        .ime-price-cell h4 {\n            margin: 0;\n            font-size: 24px;\n            font-weight: bold;\n            color: #000000;\n        }\n\n        \/* Tablet Responsive *\/\n        @media (max-width: 1024px) {\n            .ime-vehicle-img {\n                width: 100px;\n                height: 70px;\n            }\n            \n            .ime-vehicle-details h4 {\n                font-size: 14px;\n            }\n            \n            .ime-price-cell h4 {\n                font-size: 20px;\n            }\n            \n            .ime-destination-header h4 {\n                font-size: 12px;\n            }\n\n            .ime-main-title {\n                font-size: 24px;\n            }\n        }\n\n        \/* Mobile Responsive *\/\n        @media (max-width: 768px) {\n            .ime-pricing-table-wrapper {\n                padding: 10px;\n                margin: 10px auto;\n            }\n\n            .ime-title-section {\n                padding: 20px 15px;\n            }\n\n            .ime-main-title {\n                font-size: 20px;\n            }\n            \n            .ime-header-row {\n                display: none;\n            }\n            \n            .ime-vehicle-row {\n                display: block;\n                border: 1px solid #eee;\n                border-radius: 10px;\n                margin-bottom: 15px;\n                padding: 0;\n                min-height: auto;\n                background: white;\n            }\n\n            .ime-vehicle-row:hover {\n                background: white;\n            }\n            \n            .ime-vehicle-info {\n                border-bottom: 1px solid #eee;\n                justify-content: center;\n                text-align: center;\n                flex-direction: column;\n                gap: 15px;\n                padding: 20px 15px;\n            }\n\n            .ime-vehicle-img {\n                width: 100px;\n                height: 70px;\n            }\n            \n            .ime-price-cell {\n                border: none;\n                border-bottom: 1px solid #eee;\n                position: relative;\n                padding: 15px;\n                justify-content: space-between;\n                background: #f8f9fa;\n            }\n\n            .ime-price-cell:hover {\n                background: #f8f9fa;\n            }\n            \n            .ime-price-cell:last-child {\n                border-bottom: none;\n                border-radius: 0 0 10px 10px;\n            }\n            \n            .ime-price-cell::before {\n                content: '';\n                font-weight: bold;\n                color: #2c3e50;\n                font-size: 14px;\n                text-transform: uppercase;\n            }\n            \n            .ime-price-cell:nth-child(2)::before { content: 'Aspen & Snowmass'; }\n            .ime-price-cell:nth-child(3)::before { content: 'Breckenridge'; }\n            .ime-price-cell:nth-child(4)::before { content: 'Steamboat Springs'; }\n            .ime-price-cell:nth-child(5)::before { content: 'Vail & BC'; }\n            \n            .ime-price-cell h4 {\n                font-size: 20px;\n                color: #e74c3c;\n            }\n        }\n\n        @media (max-width: 480px) {\n            .ime-main-title {\n                font-size: 18px;\n                line-height: 1.3;\n            }\n\n            .ime-vehicle-details h4 {\n                font-size: 13px;\n            }\n\n            .ime-price-cell h4 {\n                font-size: 18px;\n            }\n        }\n    <\/style>\n<\/head>\n<body>\n    <div class=\"ime-pricing-table-wrapper\">\n        <div class=\"ime-pricing-container\">\n            <!-- Main Title -->\n            <div class=\"ime-title-section\">\n                <h2 class=\"ime-main-title\">FLAT RATE DIA (Denver Airport) From\/To<\/h2>\n            <\/div>\n\n            <!-- Pricing Table -->\n            <div class=\"ime-pricing-table\">\n                <!-- Header Row -->\n                <div class=\"ime-header-row\">\n                    <div class=\"ime-vehicle-header\"><\/div>\n                    <div class=\"ime-destination-header aspen-header\">\n                        <h4>ASPEN &<br>SNOWMASS<\/h4>\n                    <\/div>\n                    <div class=\"ime-destination-header breckenridge-header\">\n                        <h4>BRECKENRIDGE<\/h4>\n                    <\/div>\n                    <div class=\"ime-destination-header steamboat-header\">\n                        <h4>STEAMBOAT<br>SPRINGS<\/h4>\n                    <\/div>\n                    <div class=\"ime-destination-header vail-header\">\n                        <h4>VAIL & BC<\/h4>\n                    <\/div>\n                <\/div>\n\n                <!-- Vehicle Rows -->\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/10\/Luxury-Full-SUV-6-Pax.png\" alt=\"Luxury SUV 1-2 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY SUV 1-2<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4>$1099<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$649<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$1099<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$649<\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2023\/01\/Luxury-SUV-6-pax-car-service-from-denver-to-vail.jpeg\" alt=\"Luxury SUV 1-6 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY SUV 1-6<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4>$1199<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$699<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$1199<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$699<\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/09\/LUXURY-SUV-1-7-PASSENGERS-1.webp\" alt=\"Luxury SUV 1-7 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY SUV 1-7<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4>$1299<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$749<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$1299<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$749<\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/05\/LUXURY-VAN-1-14-PASSENGERS.webp\" alt=\"Luxury Van 1-9 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY VAN 1-9<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4>$1699<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$949<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$1699<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$949<\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/05\/LUXURY-VAN-1-14-PASSENGERS.webp\" alt=\"Luxury Van 1-14 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY VAN 1-<br>14 PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4>$1999<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$1099<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$1999<\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4>$1099<\/h4><\/div>\n                <\/div>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/body>\n<\/html>",
+                "_id": "0fae6dc"
+              },
+              {
+                "title": "FLAT RATE EGE (Eagle-Vail Airport) From\/To",
+                "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>IME EGE Airport Pricing Table<\/title>\n    <style>\n        \/* IME EGE Airport Pricing Table - Clean Layout *\/\n        * {\n            margin: 0;\n            padding: 0;\n            box-sizing: border-box;\n        }\n\n        body {\n            font-family: Arial, sans-serif;\n            background: #f8f9fa;\n            padding: 20px;\n        }\n\n        .ime-pricing-table-wrapper {\n            width: 100%;\n            max-width: 1200px;\n            margin: 20px auto;\n        }\n\n        .ime-pricing-container {\n            background: white;\n            border-radius: 10px;\n            overflow: hidden;\n            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);\n        }\n\n        .ime-title-section {\n            text-align: center;\n            padding: 30px 20px;\n            background: white;\n        }\n\n        .ime-main-title {\n            font-size: 28px;\n            font-weight: bold;\n            color: #2c3e50;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n            margin: 0;\n        }\n\n        .ime-pricing-table {\n            width: 100%;\n        }\n\n        .ime-header-row {\n            display: grid;\n            grid-template-columns: 2fr repeat(4, 1fr);\n        }\n\n        .ime-vehicle-header {\n            background: white;\n            padding: 20px 10px;\n        }\n\n        .ime-destination-header {\n            padding: 20px 10px;\n            text-align: center;\n            background: #e74c3c;\n            border-left: 1px solid rgba(255, 255, 255, 0.2);\n        }\n\n        .ime-destination-header h4 {\n            margin: 0;\n            font-size: 14px;\n            font-weight: bold;\n            color: white;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n            line-height: 1.3;\n        }\n\n        .ime-vehicle-row {\n            display: grid;\n            grid-template-columns: 2fr repeat(4, 1fr);\n            border-bottom: 1px solid #eee;\n            min-height: 100px;\n            align-items: center;\n            transition: background-color 0.3s ease;\n        }\n\n        .ime-vehicle-row:hover {\n            background: #f8f9fa;\n        }\n\n        .ime-vehicle-row:last-child {\n            border-bottom: none;\n        }\n\n        .ime-vehicle-info {\n            display: flex;\n            align-items: center;\n            padding: 20px;\n            gap: 20px;\n        }\n\n        .ime-vehicle-img {\n            width: 120px;\n            height: 80px;\n            object-fit: cover;\n            border-radius: 5px;\n            flex-shrink: 0;\n        }\n\n        .ime-vehicle-details h4 {\n            margin: 0;\n            font-size: 16px;\n            font-weight: bold;\n            color: #2c3e50;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n            line-height: 1.4;\n        }\n\n        .ime-price-cell {\n            padding: 20px 10px;\n            text-align: center;\n            border-left: 1px solid #eee;\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            transition: background-color 0.3s ease;\n        }\n\n        .ime-price-cell:hover {\n            background: #f1f8ff;\n        }\n\n        .ime-price-cell h4 {\n            margin: 0;\n            font-size: 24px;\n            font-weight: bold;\n            color: #000000;\n        }\n\n        .ime-price-cell a {\n            text-decoration: none;\n            color: inherit;\n        }\n\n        .ime-price-cell a:hover {\n            color: #e74c3c;\n        }\n\n        \/* Tablet Responsive *\/\n        @media (max-width: 1024px) {\n            .ime-vehicle-img {\n                width: 100px;\n                height: 70px;\n            }\n            \n            .ime-vehicle-details h4 {\n                font-size: 14px;\n            }\n            \n            .ime-price-cell h4 {\n                font-size: 20px;\n            }\n            \n            .ime-destination-header h4 {\n                font-size: 12px;\n            }\n\n            .ime-main-title {\n                font-size: 24px;\n            }\n        }\n\n        \/* Mobile Responsive *\/\n        @media (max-width: 768px) {\n            .ime-pricing-table-wrapper {\n                padding: 10px;\n                margin: 10px auto;\n            }\n\n            .ime-title-section {\n                padding: 20px 15px;\n            }\n\n            .ime-main-title {\n                font-size: 20px;\n            }\n            \n            .ime-header-row {\n                display: none;\n            }\n            \n            .ime-vehicle-row {\n                display: block;\n                border: 1px solid #eee;\n                border-radius: 10px;\n                margin-bottom: 15px;\n                padding: 0;\n                min-height: auto;\n                background: white;\n            }\n\n            .ime-vehicle-row:hover {\n                background: white;\n            }\n            \n            .ime-vehicle-info {\n                border-bottom: 1px solid #eee;\n                justify-content: center;\n                text-align: center;\n                flex-direction: column;\n                gap: 15px;\n                padding: 20px 15px;\n            }\n\n            .ime-vehicle-img {\n                width: 100px;\n                height: 70px;\n            }\n            \n            .ime-price-cell {\n                border: none;\n                border-bottom: 1px solid #eee;\n                position: relative;\n                padding: 15px;\n                justify-content: space-between;\n                background: #f8f9fa;\n            }\n\n            .ime-price-cell:hover {\n                background: #f8f9fa;\n            }\n            \n            .ime-price-cell:last-child {\n                border-bottom: none;\n                border-radius: 0 0 10px 10px;\n            }\n            \n            .ime-price-cell::before {\n                content: '';\n                font-weight: bold;\n                color: #2c3e50;\n                font-size: 14px;\n                text-transform: uppercase;\n            }\n            \n            .ime-price-cell:nth-child(2)::before { content: 'Vail & BC'; }\n            .ime-price-cell:nth-child(3)::before { content: 'Aspen & Snowmass'; }\n            .ime-price-cell:nth-child(4)::before { content: 'Breckenridge'; }\n            .ime-price-cell:nth-child(5)::before { content: 'Steamboat Springs'; }\n            \n            .ime-price-cell h4 {\n                font-size: 20px;\n                color: #e74c3c;\n            }\n        }\n\n        @media (max-width: 480px) {\n            .ime-main-title {\n                font-size: 18px;\n                line-height: 1.3;\n            }\n\n            .ime-vehicle-details h4 {\n                font-size: 13px;\n            }\n\n            .ime-price-cell h4 {\n                font-size: 18px;\n            }\n        }\n    <\/style>\n<\/head>\n<body>\n    <div class=\"ime-pricing-table-wrapper\">\n        <div class=\"ime-pricing-container\">\n            <!-- Main Title -->\n            <div class=\"ime-title-section\">\n                <h2 class=\"ime-main-title\">FLAT RATE EGE (Eagle-Vail Airport) From\/To<\/h2>\n            <\/div>\n\n            <!-- Pricing Table -->\n            <div class=\"ime-pricing-table\">\n                <!-- Header Row -->\n                <div class=\"ime-header-row\">\n                    <div class=\"ime-vehicle-header\"><\/div>\n                    <div class=\"ime-destination-header\">\n                        <h4>VAIL & BC<\/h4>\n                    <\/div>\n                    <div class=\"ime-destination-header\">\n                        <h4>ASPEN &<br>SNOWMASS<\/h4>\n                    <\/div>\n                    <div class=\"ime-destination-header\">\n                        <h4>BRECKENRIDGE<\/h4>\n                    <\/div>\n                    <div class=\"ime-destination-header\">\n                        <h4>STEAMBOAT<br>SPRINGS<\/h4>\n                    <\/div>\n                <\/div>\n\n                <!-- Vehicle Rows -->\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/10\/Luxury-Full-SUV-6-Pax.png\" alt=\"Luxury SUV 1-2 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY SUV 1-2<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$299<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$549<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$399<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$549<\/a><\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2023\/01\/Luxury-SUV-6-pax-car-service-from-denver-to-vail.jpeg\" alt=\"Luxury SUV 1-6 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY SUV 1-6<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$349<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$599<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$449<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$599<\/a><\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/09\/LUXURY-SUV-1-7-PASSENGERS-1.webp\" alt=\"Luxury SUV 1-7 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY SUV 1-7<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$399<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$649<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$499<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$649<\/a><\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/05\/LUXURY-VAN-1-14-PASSENGERS.webp\" alt=\"Luxury Van 1-9 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY VAN 1-9<br>PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$499<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$799<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$599<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$799<\/a><\/h4><\/div>\n                <\/div>\n\n                <div class=\"ime-vehicle-row\">\n                    <div class=\"ime-vehicle-info\">\n                        <img src=\"https:\/\/imedenver.com\/wp-content\/uploads\/2022\/05\/LUXURY-VAN-1-14-PASSENGERS.webp\" alt=\"Luxury Van 1-14 Passenger\" class=\"ime-vehicle-img\">\n                        <div class=\"ime-vehicle-details\">\n                            <h4>LUXURY VAN 1-<br>14 PASSENGER<\/h4>\n                        <\/div>\n                    <\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$599<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$899<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$699<\/a><\/h4><\/div>\n                    <div class=\"ime-price-cell\"><h4><a href=\"\/reservations\">$899<\/a><\/h4><\/div>\n                <\/div>\n            <\/div>\n        <\/div>\n    <\/div>\n<\/body>\n<\/html>",
+                "_id": "4021d29"
+              }
+            ]
+          },
+          "elements": [
+            
+          ],
+          "isInner": false,
+          "widgetType": "mfn_tabs",
+          "elType": "widget"
+        },
+        {
+          "id": "34b0844d",
+          "settings": {
+            "text": "All From Rates To \/ From the Airport",
+            "align": "center",
+            "background_color": "#007bff",
+            "color": "#ffffff",
+            "typography_font_size": {
+              "unit": "px",
+              "size": 16
+            },
+            "typography_font_weight": "500",
+            "border_radius": {
+              "unit": "px",
+              "top": "25",
+              "right": "25",
+              "bottom": "25",
+              "left": "25",
+              "isLinked": true
+            },
+            "button_text_padding": {
+              "unit": "px",
+              "top": "12",
+              "right": "30",
+              "bottom": "12",
+              "left": "30",
+              "isLinked": false
+            },
+            "selected_icon": {
+              "value": "fas fa-chevron-down",
+              "library": "fa-solid"
+            },
+            "icon_align": "right",
+            "_css_classes": "dropdown-toggle",
+            "link": {
+              "url": "https:\/\/expresscoloradotransportation.com\/express-colorado-transportation-rates\/",
+              "is_external": "",
+              "nofollow": "",
+              "custom_attributes": ""
+            }
+          },
+          "elements": [
+            
+          ],
+          "isInner": false,
+          "widgetType": "button",
+          "elType": "widget"
+        }
+      ],
+      "isInner": false,
+      "elType": "container"
+    },
+    {
+      "id": "670109f4",
+      "settings": {
+        "flex_direction": "column"
+      },
+      "elements": [
+        {
+          "id": "165079fc",
+          "settings": {
+            "title": "READ OUR LATEST BLOG NEWS",
+            "header_size": "h3"
+          },
+          "elements": [
+            
+          ],
+          "isInner": false,
+          "widgetType": "heading",
+          "elType": "widget"
+        },
+        {
+          "id": "360698bb",
+          "settings": {
+            "style": "timeline",
+            "title_tag": "h5",
+            "excerpt": "0",
+            "pagination": "1",
+            "greyscale": "1"
+          },
+          "elements": [
+            
+          ],
+          "isInner": false,
+          "widgetType": "mfn_blog",
+          "elType": "widget"
+        }
+      ],
+      "isInner": false,
+      "elType": "container"
+    },
+    {
+      "id": "754b372c",
+      "settings": {
+        "flex_direction": "row",
+        "flex_gap": {
+          "unit": "px",
+          "size": 0,
+          "column": "0",
+          "row": "0"
+        }
+      },
+      "elements": [
+        {
+          "id": "3bd35160",
+          "settings": {
+            "flex_direction": "column",
+            "content_width": "full",
+            "width": {
+              "unit": "%",
+              "size": 7.637
+            },
+            "_flex_size": "none",
+            "_element_width": "initial"
+          },
+          "elements": [
+            
+          ],
+          "isInner": true,
+          "elType": "container"
+        },
+        {
+          "id": "7cd37aac",
+          "settings": {
+            "flex_direction": "column",
+            "content_width": "full",
+            "width": {
+              "unit": "%",
+              "size": 86.687
+            },
+            "_flex_size": "none",
+            "_element_width": "initial"
+          },
+          "elements": [
+            {
+              "id": "4a95165e",
+              "settings": {
+                "title": "Frequently Asked Questions About Our Car Service",
+                "tabs": [
+                  {
+                    "title": "How much does the car service cost?",
+                    "content": "<p>The cost varies depending on the type of vehicle and additional services requested. Typically, the price ranges from\u00a0<strong>$300 to $500<\/strong>\u00a0for a one-way trip. While it may seem like an investment, the comfort, reliability, and peace of mind it offers make it worth every penny.<\/p>",
+                    "_id": "a3a363f"
+                  },
+                  {
+                    "title": "What vehicles are available?",
+                    "content": "<p>Express Colorado Transportation offers a fleet of luxury vehicles, including:<\/p><ul><li>Spacious SUVs for families or groups<\/li><li>Executive sedans for business travelers \ufe0f<\/li><li>Premium vans for larger groups or extra luggage needs<\/li><\/ul>",
+                    "_id": "ed8ac53"
+                  },
+                  {
+                    "_id": "1c6172a",
+                    "title": "Do you offer services for ski equipment?",
+                    "content": "<p>Yes! Our vehicles are equipped to handle bulky ski equipment, snowboards, and luggage, ensuring a hassle-free transfer to your mountain getaway.<\/p>"
+                  },
+                  {
+                    "_id": "f7ae214",
+                    "title": " Is the service available year-round?",
+                    "content": "<p>Absolutely! Whether you\u2019re visiting for skiing in the winter or hiking in the summer, we operate year-round to cater to your needs.<\/p>"
+                  },
+                  {
+                    "_id": "f92d6e8",
+                    "title": "How do I book a ride?",
+                    "content": "<p>Booking is simple. Visit our website or call our friendly customer service team to reserve your ride in advance. Pro tip: Book early during peak travel seasons to secure your spot.\u00a0<\/p>"
+                  }
+                ]
+              },
+              "elements": [
+                
+              ],
+              "isInner": false,
+              "widgetType": "mfn_faq",
+              "elType": "widget"
+            }
+          ],
+          "isInner": true,
+          "elType": "container"
+        },
+        {
+          "id": "3f90fdaf",
+          "settings": {
+            "flex_direction": "column",
+            "content_width": "full",
+            "width": {
+              "unit": "%",
+              "size": "25"
+            }
+          },
+          "elements": [
+            
+          ],
+          "isInner": true,
+          "elType": "container"
+        }
+      ],
+      "isInner": false,
+      "elType": "container"
+    }
+  ],
+  "page_settings": {
+    "padding": {
+      "unit": "%",
+      "top": "",
+      "right": "",
+      "bottom": "",
+      "left": "",
+      "isLinked": "1"
+    },
+    "background_background": "classic",
+    "background_color": "#FFFFFF",
+    "padding_tablet": {
+      "unit": "%",
+      "top": "",
+      "right": "",
+      "bottom": "",
+      "left": "",
+      "isLinked": "1"
+    },
+    "padding_mobile": {
+      "unit": "%",
+      "top": "",
+      "right": "",
+      "bottom": "",
+      "left": "",
+      "isLinked": "1"
+    },
+    "content_wrapper_html_tag": "header",
+    "custom_css": ".additional-services { display: none; opacity: 0; transform: translateY(-20px); transition: all 0.4s ease; }\n.additional-services.show { display: flex !important; opacity: 1; transform: translateY(0); }\n.dropdown-toggle .elementor-button-icon { transition: transform 0.3s ease; }\n.dropdown-toggle.active .elementor-button-icon { transform: rotate(180deg); }\n.elementor-container:hover { transform: translateY(-5px); transition: transform 0.3s ease; }",
+    "custom_js": "jQuery(document).ready(function($) {\n  $('.dropdown-toggle .elementor-button').on('click', function(e) {\n    e.preventDefault();\n    var additionalServices = $('.additional-services');\n    var button = $(this);\n    var buttonText = button.find('.elementor-button-text');\n    \n    if (additionalServices.hasClass('show')) {\n      additionalServices.removeClass('show');\n      setTimeout(function() {\n        additionalServices.hide();\n      }, 400);\n      buttonText.text('View More Services');\n      button.removeClass('active');\n    } else {\n      additionalServices.show();\n      setTimeout(function() {\n        additionalServices.addClass('show');\n      }, 10);\n      buttonText.text('Show Less Services');\n      button.addClass('active');\n    }\n  });\n});"
+  },
+  "version": "0.4",
+  "title": "main 2",
+  "type": "container"
+}
