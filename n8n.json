@@ -269,7 +269,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        688,
+        752,
         272
       ],
       "id": "514242b2-b7ef-4a5c-924f-9a5c2c0356b6",
@@ -277,7 +277,7 @@
     },
     {
       "parameters": {
-        "url": "https://raw.githubusercontent.com/helenjonesb-creator/template/refs/heads/main/elementor-template.json",
+        "url": "https://raw.githubusercontent.com/helenjonesb-creator/template/main/elementor-template.json",
         "options": {
           "response": {
             "response": {
@@ -290,7 +290,7 @@
       "typeVersion": 4.2,
       "position": [
         512,
-        384
+        272
       ],
       "id": "8da3db5f-f486-4b3e-961e-bbd38c8dc237",
       "name": "HTTP Request"
@@ -378,7 +378,7 @@
       "main": [
         [
           {
-            "node": "Elementor",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -434,7 +434,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "474eb316-621e-4ee1-a8bb-7f5236afc1c6",
+  "versionId": "1830ed3e-9bd9-4ab1-9d33-d58f58ff32d9",
   "meta": {
     "instanceId": "e793ae1e52d0b147ee1f40e0d8aa0d09ad004584f8abb7f0e058a538df50e5f9"
   },
