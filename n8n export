@@ -1,0 +1,413 @@
+{
+  "name": "Elementor Auto Post",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a82185fa-1290-4bd9-9228-5e75b2338f06",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        -256
+      ]
+    },
+    {
+      "parameters": {
+        "sheetId": "1X5bCMHEQpPXyg2awES7vEAVvzZM4wz9zWdWGGItZAuw",
+        "range": "sheet1!A:C",
+        "options": {}
+      },
+      "id": "f531d6fa-a252-4181-8421-92974a7c6e9b",
+      "name": "Fetch Images",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 2,
+      "position": [
+        -544,
+        -352
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4pezSSMfmHK6IRdq",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://raw.githubusercontent.com/helenjonesb-creator/n8n/refs/heads/main/n8n2",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "c2d52069-cc32-48d2-a8cb-98b91a3d4073",
+      "name": "Fetch Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -544,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Simple but effective randomization for N8N environment\nconst generateVariedRandom = () => {\n  const r1 = Math.random();\n  const r2 = Math.random();\n  const r3 = Math.random();\n  \n  // Use timestamp for additional entropy (microseconds vary each call)\n  const timing = (Date.now() % 10000) / 10000;\n  \n  // Combine sources in a way that breaks patterns\n  return ((r1 + r2 + r3 + timing) / 4) % 1;\n};\n\nconst betterShuffle = (array) => {\n  if (!array || array.length <= 1) return [...(array || [])];\n  \n  const shuffled = [...array];\n  \n  // Double Fisher-Yates for better randomization\n  for (let pass = 0; pass < 2; pass++) {\n    for (let i = shuffled.length - 1; i > 0; i--) {\n      const j = Math.floor(generateVariedRandom() * (i + 1));\n      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];\n    }\n  }\n  \n  return shuffled;\n};\n\nconst getVariedCount = (total) => {\n  if (!total || total < 3) return Math.min(total, 3); // If less than 3 available, use what we have\n  \n  const rand1 = generateVariedRandom();\n  \n  // Ensure minimum 3 images, maximum 5\n  const minImages = 3;\n  const maxImages = Math.min(5, total);\n  \n  if (maxImages === minImages) return minImages;\n  \n  // Weighted selection for 3-5 images\n  const weights = [0.4, 0.35, 0.25]; // for 3, 4, 5 images\n  const range = maxImages - minImages + 1;\n  const effectiveWeights = weights.slice(0, range);\n  \n  let cumulative = 0;\n  const totalWeight = effectiveWeights.reduce((sum, w) => sum + w, 0);\n  const randomValue = rand1 * totalWeight;\n  \n  for (let i = 0; i < effectiveWeights.length; i++) {\n    cumulative += effectiveWeights[i];\n    if (randomValue <= cumulative) {\n      const result = minImages + i;\n      console.log(`Selected count: ${result} from ${total} available (min: ${minImages})`);\n      return result;\n    }\n  }\n  \n  return minImages; // Fallback to minimum 3\n};\n\n// Process and validate images from Google Sheets\ntry {\n  console.log('Processing images from Google Sheets...');\n  console.log('Input items:', items.length);\n  \n  const images = items\n    .map((item, index) => {\n      console.log(`Item ${index}:`, JSON.stringify(item.json, null, 2));\n      return {\n        url: item.json.image_url || item.json.url || item.json.Image || item.json.URL,\n        alt: item.json.alt_text || item.json.alt || item.json.Alt || 'Article Image',\n        caption: item.json.caption || item.json.Caption || ''\n      };\n    })\n    .filter(img => img.url && img.url.trim() !== '')\n    .filter((img, index, arr) => arr.findIndex(i => i.url === img.url) === index);\n\n  console.log(`Processed ${images.length} valid images`);\n  \n  if (images.length === 0) {\n    console.log('No valid images found, continuing with empty array');\n    return [{ \n      json: { \n        images: [],\n        total_available: 0,\n        selected_count: 0,\n        status: 'no_images'\n      } \n    }];\n  }\n\n  // ENHANCED RANDOMIZATION - Better than original Math.random()\n  const shuffled = betterShuffle(images);\n  const selectedCount = getVariedCount(images.length);\n  const selected = shuffled.slice(0, selectedCount);\n\n  console.log(`Selected ${selected.length} images from ${images.length} available`);\n  \n  return [{ \n    json: { \n      images: selected,\n      total_available: images.length,\n      selected_count: selected.length,\n      status: 'success'\n    } \n  }];\n  \n} catch (error) {\n  console.error('Image processing error:', error.message);\n  return [{ \n    json: { \n      error: error.message,\n      images: [],\n      selected_count: 0,\n      status: 'error'\n    } \n  }];\n}"
+      },
+      "id": "272813e8-facf-4b42-8d9a-ea1502ed35d7",
+      "name": "Process Images",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -352
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Convert Markdown to HTML and extract metadata\ntry {\n  console.log('Processing markdown content...');\n  \n  const markdownContent = $json.data || $json.body || $json.content || '';\n  \n  if (!markdownContent) {\n    throw new Error('No markdown content found');\n  }\n  \n  console.log('Markdown content length:', markdownContent.length);\n  \n  let title = 'Untitled Article';\n  const titleMatch = markdownContent.match(/^#\\s+(.+)$/m);\n  if (titleMatch) {\n    title = titleMatch[1].trim();\n  }\n  \n  let excerpt = '';\n  const lines = markdownContent.split('\\n').filter(line => line.trim());\n  for (let line of lines) {\n    if (!line.startsWith('#') && line.trim().length > 50) {\n      excerpt = line.trim().substring(0, 160) + '...';\n      break;\n    }\n  }\n  \n  function parseMarkdown(mdText) {\n    const lines = mdText.split('\\n');\n    let html = '';\n    let inCodeBlock = false;\n    let listType = null;\n\n    for (let line of lines) {\n      line = line.trimEnd();\n\n      if (line.startsWith('```')) {\n        if (!inCodeBlock) {\n          html += '<pre><code>';\n          inCodeBlock = true;\n        } else {\n          html += '</code></pre>';\n          inCodeBlock = false;\n        }\n        continue;\n      }\n      \n      if (inCodeBlock) {\n        html += line + '\\n';\n        continue;\n      }\n\n      if (listType && !line.match(/^\\s*[-*]\\s+/) && !line.match(/^\\s*\\d+\\.\\s+/)) {\n        html += listType === 'ul' ? '</ul>' : '</ol>';\n        listType = null;\n      }\n\n      if (!line.trim()) {\n        if (listType) {\n          html += listType === 'ul' ? '</ul>' : '</ol>';\n          listType = null;\n        }\n        continue;\n      }\n\n      if (line.match(/^######\\s+/)) {\n        html += `<h6>${line.replace(/^######\\s+/, '')}</h6>`;\n      } else if (line.match(/^#####\\s+/)) {\n        html += `<h5>${line.replace(/^#####\\s+/, '')}</h5>`;\n      } else if (line.match(/^####\\s+/)) {\n        html += `<h4>${line.replace(/^####\\s+/, '')}</h4>`;\n      } else if (line.match(/^###\\s+/)) {\n        html += `<h3>${line.replace(/^###\\s+/, '')}</h3>`;\n      } else if (line.match(/^##\\s+/)) {\n        html += `<h2>${line.replace(/^##\\s+/, '')}</h2>`;\n      } else if (line.match(/^#\\s+/)) {\n        html += `<h1>${line.replace(/^#\\s+/, '')}</h1>`;\n      } else if (line.match(/^\\s*[-*]\\s+/)) {\n        if (listType !== 'ul') {\n          html += '<ul>';\n          listType = 'ul';\n        }\n        html += `<li>${line.replace(/^\\s*[-*]\\s+/, '')}</li>`;\n      } else if (line.match(/^\\s*\\d+\\.\\s+/)) {\n        if (listType !== 'ol') {\n          html += '<ol>';\n          listType = 'ol';\n        }\n        html += `<li>${line.replace(/^\\s*\\d+\\.\\s+/, '')}</li>`;\n      } else {\n        if (listType) {\n          html += listType === 'ul' ? '</ul>' : '</ol>';\n          listType = null;\n        }\n        \n        let processedLine = line;\n        processedLine = processedLine.replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');\n        processedLine = processedLine.replace(/(?<!\\*)\\*([^*]+)\\*(?!\\*)/g, '<em>$1</em>');\n        processedLine = processedLine.replace(/`([^`]+)`/g, '<code>$1</code>');\n        processedLine = processedLine.replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g, '<a href=\"$2\" target=\"_blank\" rel=\"noopener\">$1</a>');\n        processedLine = processedLine.replace(/!\\[([^\\]]*)\\]\\(([^)]+)\\)/g, '<img src=\"$2\" alt=\"$1\" style=\"max-width: 100%; height: auto;\">');\n        \n        if (processedLine.trim()) {\n          html += `<p>${processedLine}</p>`;\n        }\n      }\n    }\n\n    if (listType) {\n      html += listType === 'ul' ? '</ul>' : '</ol>';\n    }\n\n    return html;\n  }\n  \n  const htmlContent = parseMarkdown(markdownContent);\n  \n  const paragraphs = [];\n  const paragraphMatches = htmlContent.match(/<p[^>]*>(.*?)<\\/p>/g);\n  if (paragraphMatches) {\n    paragraphMatches.forEach(match => {\n      const text = match.replace(/<[^>]+>/g, '').trim();\n      if (text && text.length > 20) {\n        paragraphs.push(text);\n      }\n    });\n  }\n  \n  console.log(`Processed article: ${title}`);\n  console.log(`Paragraphs extracted: ${paragraphs.length}`);\n  \n  return [{\n    json: {\n      title: title,\n      content: htmlContent,\n      excerpt: excerpt,\n      paragraphs: paragraphs,\n      paragraph_count: paragraphs.length,\n      word_count: paragraphs.join(' ').split(/\\s+/).length,\n      status: 'success'\n    }\n  }];\n  \n} catch (error) {\n  console.error('Article processing error:', error.message);\n  return [{\n    json: {\n      title: 'Error Processing Article',\n      content: `<p>Error: ${error.message}</p>`,\n      excerpt: 'Error processing content',\n      paragraphs: [],\n      paragraph_count: 0,\n      word_count: 0,\n      status: 'error',\n      error: error.message\n    }\n  }];\n}"
+      },
+      "id": "58a504cc-a962-4195-96b1-a8fe96d7dfc9",
+      "name": "Process Content",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Enhanced Combine Data Node - Handles Images, Content, and SEO Data\ntry {\n  const nodeContext = this.getWorkflowStaticData('node');\n  const currentData = $json;\n  \n  console.log('Combine Data - Current input type:', typeof currentData);\n  console.log('Current data keys:', Object.keys(currentData || {}));\n  \n  // Detect and store different data types\n  \n  // Store images data (from Process Images node)\n  if (currentData.images !== undefined || currentData.status === 'no_images' || currentData.status === 'error') {\n    nodeContext.imagesData = currentData;\n    console.log('✅ Stored images data');\n  }\n  \n  // Store content data (from Process Content node) \n  // Must have title AND content AND NOT have yoast_meta (to distinguish from SEO data)\n  if (currentData.title !== undefined && currentData.content !== undefined && !currentData.yoast_meta && !currentData.seo_data) {\n    nodeContext.contentData = currentData;\n    console.log('✅ Stored content data');\n  }\n  \n  // Store SEO data (from Enhanced Yoast SEO Integration)\n  // Must have yoast_meta OR seo_data\n  if (currentData.yoast_meta !== undefined || currentData.seo_data !== undefined) {\n    nodeContext.seoData = currentData;\n    console.log('✅ Stored SEO data');\n    console.log('SEO data focus keyphrase:', currentData.seo_data?.focus_keyphrase);\n  }\n  \n  // Debug: Show what we have so far\n  console.log('Current storage status:');\n  console.log('- Has images:', !!nodeContext.imagesData);\n  console.log('- Has content:', !!nodeContext.contentData);\n  console.log('- Has SEO:', !!nodeContext.seoData);\n  \n  // Check if all THREE data sources are ready\n  if (nodeContext.imagesData && nodeContext.contentData && nodeContext.seoData) {\n    console.log('🎉 All data sources ready - combining now!');\n    \n    const imagesData = nodeContext.imagesData;\n    const contentData = nodeContext.contentData;\n    const seoData = nodeContext.seoData;\n    \n    // Clear stored data to prevent memory issues\n    delete nodeContext.imagesData;\n    delete nodeContext.contentData;\n    delete nodeContext.seoData;\n    \n    // Check for content processing errors\n    if (contentData.status === 'error') {\n      throw new Error(`Content processing error: ${contentData.error}`);\n    }\n    \n    // Combine all data sources\n    const combinedData = {\n      // Content data (primary)\n      title: contentData.title,\n      content: contentData.content,\n      excerpt: contentData.excerpt,\n      paragraphs: contentData.paragraphs || [],\n      paragraph_count: contentData.paragraph_count || 0,\n      word_count: contentData.word_count || 0,\n      content_status: contentData.status || 'unknown',\n      \n      // Images data\n      images: imagesData.images || [],\n      total_available_images: imagesData.total_available || 0,\n      selected_image_count: imagesData.selected_count || 0,\n      images_status: imagesData.status || 'unknown',\n      \n      // SEO data (from Gemini AI processing)\n      yoast_meta: seoData.yoast_meta || {},\n      seo_data: seoData.seo_data || {},\n      gemini_response: seoData.gemini_response,\n      seo_processing_info: seoData.seo_processing_info || {},\n      \n      // Processing metadata\n      processing_info: {\n        combined_at: new Date().toISOString(),\n        data_sources_combined: 3,\n        seo_integrated: !!(seoData.yoast_meta && Object.keys(seoData.yoast_meta).length > 0),\n        focus_keyphrase: seoData.seo_data?.focus_keyphrase || 'N/A',\n        total_images: imagesData.images?.length || 0,\n        total_paragraphs: contentData.paragraphs?.length || 0\n      }\n    };\n    \n    console.log('✅ Successfully combined all data sources');\n    console.log(`📊 Final data includes:`);\n    console.log(`   - Title: \"${combinedData.title}\"`);\n    console.log(`   - Content: ${combinedData.content?.length || 0} characters`);\n    console.log(`   - Images: ${combinedData.images?.length || 0} selected`);\n    console.log(`   - SEO Fields: ${Object.keys(combinedData.yoast_meta || {}).length}`);\n    console.log(`   - Focus Keyphrase: \"${combinedData.seo_data?.focus_keyphrase || 'N/A'}\"`);\n    \n    return [{ json: combinedData }];\n    \n  } else {\n    // Still waiting for more data\n    console.log('⏳ Still waiting for data...');\n    console.log(`Missing: ${!nodeContext.imagesData ? 'images ' : ''}${!nodeContext.contentData ? 'content ' : ''}${!nodeContext.seoData ? 'SEO' : ''}`);\n    return []; // Return empty array to wait for more data\n  }\n  \n} catch (error) {\n  console.error('❌ Combine data error:', error.message);\n  \n  // Clear stored data on error\n  const nodeContext = this.getWorkflowStaticData('node');\n  delete nodeContext.imagesData;\n  delete nodeContext.contentData;\n  delete nodeContext.seoData;\n  \n  return [{\n    json: {\n      title: 'Error Combining Data',\n      content: `<p>Error: ${error.message}</p>`,\n      excerpt: 'Error processing content',\n      paragraphs: [],\n      images: [],\n      yoast_meta: {},\n      seo_data: {},\n      error: error.message,\n      status: 'error',\n      processing_info: {\n        error: true,\n        error_message: error.message,\n        processed_at: new Date().toISOString()\n      }\n    }\n  }];\n}"
+      },
+      "id": "2ee873fa-2dd5-4c8d-8e5e-bf1035dc81eb",
+      "name": "Combine Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        -256
+      ],
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "functionCode": "// --- Ultra-Fast Smart Content Assembly Node (Fixed for SEO Integration) ---\n\n// Get input data - check if it comes from SEO integration or directly\nconst inputData = $json;\nconst html = inputData.content || $json.content;\nconst imagesRaw = inputData.images || $json.images || [];\n\n// Extract SEO data if available from previous node\nconst yoastMeta = inputData.yoast_meta || {};\nconst seoData = inputData.seo_data || {};\n\n/**\n * Ultra-optimized content assembly with preserved dense logic\n */\nconst assembleContent = (html, images) => {\n  if (!html || typeof html !== 'string') return html;\n  if (!images || images.length === 0) return html;\n\n  const startTime = Date.now();\n\n  // --- Ultra-fast duplicate filtering (optimized) ---\n  const uniqueImages = [];\n  const seenUrls = new Set();\n  \n  for (const img of images) {\n    // Check all possible URL fields and normalize URLs\n    const urls = [\n      img.url,\n      img.medium, \n      img.url_780,\n      img.large,\n      img.thumbnail\n    ].filter(Boolean).map(url => {\n      // Fast normalization - just remove query params and fragments\n      return url.split('?')[0].split('#')[0];\n    });\n    \n    // Check if any URL variant has been seen\n    const isDuplicate = urls.some(url => seenUrls.has(url));\n    \n    if (!isDuplicate && urls.length > 0) {\n      uniqueImages.push(img);\n      urls.forEach(url => seenUrls.add(url));\n    }\n  }\n\n  console.log(`Fast filtered ${images.length} images down to ${uniqueImages.length} unique images`);\n\n  // Limit to 2-4 images max\n  const maxImages = Math.min(4, Math.max(2, uniqueImages.length));\n  const imagePool = uniqueImages\n    .sort(() => 0.5 - Math.random())\n    .slice(0, maxImages);\n\n  // Helper: get best available image URL - prefer medium sizes\n  const getBestImageUrl = (img) => {\n    return img.medium || img.url_780 || img.url;\n  };\n\n  // --- YOUR CORE DENSE LOGIC (PRESERVED) ---\n  \n  // Split content preserving structure\n  const parts = html.split(/(<figure[\\s\\S]*?<\\/figure>|<h[1-6][^>]*>[\\s\\S]*?<\\/h[1-6]>)/gi);\n\n  // Check if gap is just whitespace/comments\n  const isIgnorableGap = (gap) => /^\\s*(?:<!--[\\s\\S]*?-->\\s*|<br\\s*\\/?>s*)*$/i.test(gap || '');\n\n  // Extract paragraph information\n  const findParagraphBlocks = (section) => {\n    const re = /<p\\b[^>]*>([\\s\\S]*?)<\\/p>/gi;\n    const blocks = [];\n    let match;\n    \n    while ((match = re.exec(section)) !== null) {\n      const innerText = match[1].replace(/<[^>]+>/g, '').trim();\n      blocks.push({ \n        start: match.index, \n        end: re.lastIndex, \n        inner: match[1].trim(), \n        raw: match[0],\n        wordCount: innerText.split(/\\s+/).filter(w => w.length > 0).length\n      });\n      \n      // Prevent infinite loop\n      if (re.lastIndex === match.index) re.lastIndex++;\n    }\n    return blocks;\n  };\n\n  // Merge consecutive paragraphs intelligently\n  const mergeParagraphRuns = (section) => {\n    const blocks = findParagraphBlocks(section);\n    if (!blocks || blocks.length <= 1) return section;\n\n    // Group consecutive paragraphs\n    const runs = [];\n    let runStart = 0;\n    \n    for (let i = 0; i < blocks.length; i++) {\n      const isLast = i === blocks.length - 1;\n      \n      if (!isLast) {\n        const gap = section.slice(blocks[i].end, blocks[i + 1].start);\n        if (!isIgnorableGap(gap)) {\n          runs.push([runStart, i]);\n          runStart = i + 1;\n        }\n      } else {\n        runs.push([runStart, i]);\n      }\n    }\n\n    // Rebuild section with merged paragraphs\n    let rebuilt = '';\n    let cursor = 0;\n    \n    for (const [startIdx, endIdx] of runs) {\n      // Add content before first paragraph of run\n      const beforeStart = blocks[startIdx].start;\n      if (cursor < beforeStart) {\n        rebuilt += section.slice(cursor, beforeStart);\n      }\n\n      if (endIdx > startIdx) {\n        // Merge multiple paragraphs - clean up newlines\n        const combinedContent = blocks.slice(startIdx, endIdx + 1)\n          .map(block => block.inner)\n          .filter(content => content.length > 0)\n          .join(' ')\n          .replace(/\\s+/g, ' ') // Replace multiple spaces/newlines with single space\n          .trim();\n        rebuilt += `<p>${combinedContent}</p>`;\n      } else {\n        // Single paragraph - clean up content\n        const cleanContent = blocks[startIdx].inner.replace(/\\s+/g, ' ').trim();\n        rebuilt += `<p>${cleanContent}</p>`;\n      }\n      \n      cursor = blocks[endIdx].end;\n    }\n    \n    // Add any remaining content\n    if (cursor < section.length) {\n      rebuilt += section.slice(cursor);\n    }\n    \n    return rebuilt;\n  };\n\n  // --- OPTIMIZED: Strategic image injection after dense processing ---\n  const injectImagesAfterDenseProcessing = (processedContent, availableImages) => {\n    if (!availableImages || availableImages.length === 0) return processedContent;\n\n    // Fast separation of headers, existing figures, and content sections\n    const sections = [];\n    let pos = 0;\n    const len = processedContent.length;\n    \n    while (pos < len) {\n      // Fast search for next structural element\n      let nextHeader = processedContent.indexOf('<h', pos);\n      let nextFigure = processedContent.indexOf('<figure', pos);\n      \n      // Find the earliest structural element\n      let nextStructural = -1;\n      let structuralType = '';\n      \n      if (nextHeader !== -1 && (nextFigure === -1 || nextHeader < nextFigure)) {\n        nextStructural = nextHeader;\n        structuralType = 'header';\n      } else if (nextFigure !== -1) {\n        nextStructural = nextFigure;\n        structuralType = 'figure';\n      }\n      \n      if (nextStructural === -1) {\n        // No more structural elements, add remaining content\n        const remainingContent = processedContent.slice(pos).trim();\n        if (remainingContent) {\n          sections.push({ type: 'content', content: remainingContent });\n        }\n        break;\n      }\n      \n      // Add content before structural element\n      if (nextStructural > pos) {\n        const content = processedContent.slice(pos, nextStructural).trim();\n        if (content) {\n          sections.push({ type: 'content', content });\n        }\n      }\n      \n      // Find end of structural element and add it\n      let endTag, searchStart;\n      if (structuralType === 'header') {\n        const headerMatch = processedContent.slice(nextStructural).match(/^<h([1-6])[^>]*>/);\n        if (headerMatch) {\n          endTag = `</h${headerMatch[1]}>`;\n          searchStart = nextStructural + headerMatch[0].length;\n        }\n      } else {\n        endTag = '</figure>';\n        searchStart = nextStructural + 7; // '<figure'.length\n      }\n      \n      if (endTag) {\n        const endPos = processedContent.indexOf(endTag, searchStart);\n        if (endPos !== -1) {\n          const element = processedContent.slice(nextStructural, endPos + endTag.length);\n          sections.push({ type: structuralType, content: element });\n          pos = endPos + endTag.length;\n        } else {\n          pos = nextStructural + 1; // Skip this malformed element\n        }\n      } else {\n        pos = nextStructural + 1;\n      }\n    }\n\n    // Fast paragraph counting across all content sections\n    let totalParagraphs = 0;\n    for (const section of sections) {\n      if (section.type === 'content') {\n        let searchPos = 0;\n        while ((searchPos = section.content.indexOf('<p', searchPos)) !== -1) {\n          totalParagraphs++;\n          searchPos += 2;\n        }\n      }\n    }\n\n    if (totalParagraphs === 0) {\n      console.log('No paragraphs found after dense processing - skipping image injection');\n      return processedContent;\n    }\n\n    console.log(`Found ${totalParagraphs} paragraphs after dense processing`);\n\n    // Define injection strategy based on content length and available images\n    const maxImagesToUse = Math.min(availableImages.length, Math.floor(totalParagraphs / 2) + 1);\n    const injectionPlan = [];\n    \n    if (totalParagraphs >= 2) {\n      // Always place after 1st paragraph\n      injectionPlan.push(1);\n      \n      if (totalParagraphs >= 4 && maxImagesToUse > 1) {\n        // Place after 2nd-to-last paragraph  \n        injectionPlan.push(totalParagraphs - 1);\n      }\n      \n      // Distribute remaining images in middle sections\n      if (maxImagesToUse > 2 && totalParagraphs > 4) {\n        const remainingSlots = maxImagesToUse - 2;\n        const middleStart = 2;\n        const middleEnd = totalParagraphs - 2;\n        \n        if (middleEnd > middleStart) {\n          const step = Math.floor((middleEnd - middleStart) / remainingSlots);\n          for (let i = 0; i < remainingSlots; i++) {\n            const position = middleStart + (i * step);\n            if (position < middleEnd && !injectionPlan.includes(position)) {\n              injectionPlan.push(position);\n            }\n          }\n        }\n      }\n    } else if (totalParagraphs === 1 && maxImagesToUse > 0) {\n      injectionPlan.push(1); // After the only paragraph\n    }\n\n    // Sort injection points and ensure uniqueness\n    const sortedInjectionPoints = [...new Set(injectionPlan)]\n      .sort((a, b) => a - b)\n      .slice(0, maxImagesToUse);\n\n    console.log(`Will inject ${sortedInjectionPoints.length} images after paragraphs: [${sortedInjectionPoints.join(', ')}]`);\n\n    // Build final content with images injected ONLY after complete paragraphs\n    const finalSections = [];\n    let globalParagraphCounter = 0;\n    let imageIndex = 0;\n    const usedImages = new Set();\n\n    for (const section of sections) {\n      finalSections.push(section);\n      \n      if (section.type === 'content') {\n        // Count paragraphs in this section and inject images after them\n        let searchPos = 0;\n        while ((searchPos = section.content.indexOf('<p', searchPos)) !== -1) {\n          globalParagraphCounter++;\n          \n          // Check if this global paragraph position is an injection point\n          if (sortedInjectionPoints.includes(globalParagraphCounter) && \n              imageIndex < availableImages.length && \n              imageIndex < maxImagesToUse) {\n            \n            const img = availableImages[imageIndex];\n            const imageUrl = getBestImageUrl(img);\n            \n            if (imageUrl && !usedImages.has(imageUrl)) {\n              // Randomly choose between center and left alignment\n              const isLeftAligned = Math.random() < 0.5;\n              \n              let figureHtml;\n              if (isLeftAligned) {\n                // Left-aligned figure without text wrap\n                figureHtml = `<figure style=\"display:block;margin:24px 0;text-align:left;clear:both;\"><img src=\"${imageUrl}\" alt=\"${img.alt || 'Article Image'}\" style=\"width:100%;max-width:500px;height:auto;display:block;border-radius:8px;\" loading=\"lazy\"/>${img.caption ? `<figcaption style=\"margin-top:8px;font-style:italic;color:#666;font-size:13px;text-align:left;\">${img.caption}</figcaption>` : ''}</figure>`;\n              } else {\n                // Center-aligned figure (original)\n                figureHtml = `<figure style=\"text-align:center;margin:24px 0;clear:both;\"><img src=\"${imageUrl}\" alt=\"${img.alt || 'Article Image'}\" style=\"width:100%;max-width:600px;height:auto;display:block;margin:0 auto;border-radius:8px;\" loading=\"lazy\"/>${img.caption ? `<figcaption style=\"text-align:center;margin-top:12px;font-style:italic;color:#666;font-size:14px;\">${img.caption}</figcaption>` : ''}</figure>`;\n              }\n              \n              finalSections.push({ type: 'injected-figure', content: figureHtml });\n              usedImages.add(imageUrl);\n              imageIndex++;\n              \n              console.log(`Injected ${isLeftAligned ? 'left-aligned' : 'center-aligned'} image ${imageIndex} after paragraph ${globalParagraphCounter}`);\n            }\n          }\n          \n          searchPos += 2;\n        }\n      }\n    }\n\n    console.log(`Final result: Used ${imageIndex} out of ${availableImages.length} available images`);\n    \n    // Reconstruct final HTML from sections\n    return finalSections.map(section => section.content).join('');\n  };\n\n  // --- EXECUTE YOUR DENSE LOGIC FIRST, THEN OPTIMIZED INJECTION ---\n  try {\n    console.log('Ultra-fast processing with preserved dense logic...');\n    \n    let processedContent = '';\n    \n    // STEP 1: Apply your original dense logic (content merging and cleaning)\n    const denseStart = Date.now();\n    \n    // Combine all text content first, preserving headers and figures\n    let allTextContent = '';\n    let nonTextParts = [];\n    \n    for (let i = 0; i < parts.length; i++) {\n      let chunk = parts[i];\n      if (!chunk) continue;\n\n      // Keep headers and existing figures separate\n      if (/^<h[1-6][^>]*>/i.test(chunk) || /^<figure/i.test(chunk)) {\n        // Store position and content of non-text elements\n        nonTextParts.push({\n          position: allTextContent.length,\n          content: chunk\n        });\n      } else {\n        // Apply your dense merging and cleaning logic\n        chunk = mergeParagraphRuns(chunk);\n        allTextContent += chunk;\n      }\n    }\n    \n    // Reconstruct content with headers/figures in original positions\n    processedContent = allTextContent;\n    \n    // Insert headers and figures back in their original positions\n    for (let i = nonTextParts.length - 1; i >= 0; i--) {\n      const part = nonTextParts[i];\n      processedContent = processedContent.slice(0, part.position) + part.content + processedContent.slice(part.position);\n    }\n    \n    console.log(`Dense processing completed in ${Date.now() - denseStart}ms`);\n    \n    // STEP 2: Apply optimized image injection AFTER your dense processing\n    const injectStart = Date.now();\n    if (imagePool.length > 0) {\n      console.log(`Applying optimized image injection to densely processed content with ${imagePool.length} images`);\n      processedContent = injectImagesAfterDenseProcessing(processedContent, imagePool);\n    }\n    console.log(`Image injection completed in ${Date.now() - injectStart}ms`);\n    \n    // Final cleanup - remove any stray newlines that might have been missed\n    const cleanupStart = Date.now();\n    processedContent = processedContent\n      .replace(/\\n+/g, ' ')\n      .replace(/\\s+/g, ' ')\n      .trim();\n    console.log(`Final cleanup completed in ${Date.now() - cleanupStart}ms`);\n    \n    const totalTime = Date.now() - startTime;\n    console.log(`Total processing: ${totalTime}ms for ${html.length} chars (with preserved dense logic)`);\n    \n    return processedContent;\n    \n  } catch (err) {\n    console.error('Enhanced Smart Content Assembly failed:', err.message);\n    return html; // Return original HTML on error\n  }\n};\n\n// --- Execute the content assembly ---\nconst processedHTML = assembleContent(html, imagesRaw);\n\n// --- Return the processed content with SEO integration ---\nconst finalOutput = { \n  // Preserve all original data\n  ...(inputData || {}), \n  \n  // Update with processed content\n  content: processedHTML,\n  \n  // Merge SEO metadata if available\n  meta: {\n    ...(inputData.meta || {}),\n    ...yoastMeta\n  },\n  \n  // Include SEO data for reference\n  seo_data: seoData,\n  \n  // Processing information\n  processing_info: {\n    original_images: imagesRaw.length,\n    processed_at: new Date().toISOString(),\n    processing_flow: 'dense-logic-then-optimized-injection',\n    seo_integrated: Object.keys(yoastMeta).length > 0,\n    yoast_fields_count: Object.keys(yoastMeta).length\n  }\n};\n\nconsole.log('Smart Content Assembly completed with SEO integration');\nif (Object.keys(yoastMeta).length > 0) {\n  console.log(`Integrated ${Object.keys(yoastMeta).length} Yoast SEO fields`);\n  console.log(`Focus keyphrase: ${yoastMeta._yoast_wpseo_focuskw || 'N/A'}`);\n}\n\nreturn { json: finalOutput };"
+      },
+      "id": "67e7d9cb-1d9c-4d54-bb6c-0d2739eb32ab",
+      "name": "Smart Content Assembly",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        96,
+        -256
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://tan-vulture-161523.hostingersite.com/wp-json/wp/v2/pages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.title }}"
+            },
+            {
+              "name": "content",
+              "value": "={{ $json.content }}"
+            },
+            {
+              "name": "excerpt",
+              "value": "={{ $json.excerpt }}"
+            },
+            {
+              "name": "status",
+              "value": "={{ $json.status }}"
+            },
+            {
+              "name": "categories",
+              "value": "={{ $json.categories }}"
+            },
+            {
+              "name": "status",
+              "value": "={{ $json.status }}"
+            },
+            {
+              "name": "_elementor_edit_mode",
+              "value": "={{ $json.meta._elementor_edit_mode }}"
+            },
+            {
+              "name": "_elementor_template_type",
+              "value": "={{ $json.meta._elementor_template_type }}"
+            },
+            {
+              "name": "_elementor_version",
+              "value": "={{ $json.meta._elementor_version }}"
+            },
+            {
+              "name": "_elementor_pro_version",
+              "value": "={{ $json.meta._elementor_pro_version }}"
+            },
+            {
+              "name": "_elementor_data",
+              "value": "={{ $json.meta._elementor_data }}"
+            },
+            {
+              "name": "_elementor_page_settings",
+              "value": "={{ $json.meta._elementor_page_settings }}"
+            },
+            {
+              "name": "_elementor_controls_usage",
+              "value": "={{ $json.meta._elementor_controls_usage }}"
+            },
+            {
+              "name": "meta[_yoast_wpseo_metadesc]",
+              "value": "={{ $json.meta._yoast_wpseo_metadesc }}"
+            },
+            {
+              "name": "meta[_yoast_wpseo_title]",
+              "value": "={{ $json.meta._yoast_wpseo_title }}"
+            },
+            {
+              "name": "meta[_yoast_wpseo_focuskw]",
+              "value": "={{ $json.meta._yoast_wpseo_focuskw }}"
+            },
+            {
+              "name": "meta[_yoast_wpseo_meta-robots-noindex]",
+              "value": "={{ $json.meta['_yoast_wpseo_meta-robots-noindex'] }}"
+            },
+            {
+              "name": "_yoast_wpseo_meta-robots-nofollow",
+              "value": "={{ $json.meta['_yoast_wpseo_meta-robots-nofollow'] }}"
+            },
+            {
+              "name": "_wp_page_template",
+              "value": "={{ $json.meta._wp_page_template }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "0237eb42-934c-40e5-a20e-32ad9aa0a74d",
+      "name": "Publish to WordPress",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        464,
+        -256
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "rxAjRVxTDCpCDxSf",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an SEO expert. Create Yoast metadata for this article.\n\nTitle: {{ $json.title }}\nContent:{{ $json.excerpt }}\nReturn only valid JSON:\n{\n  \"meta_title\": \"Create a compelling creative approach, human-written style, keyword-rich title under 110 characters with NO Generic titles dont use symbolsintitle  like |, -, :, etc. \"Write titles as if you're a real person, not a marketer or AI,\n  \"meta_description\": \"Write a natural, conversational meta description under 160 characters that includes the keyword naturally and emphasizes safety, professionalism, and value \", \n  \"focus_keyphrase\": \"main keyword phrase\",\n  \"secondary_keywords\": [\"keyword1\", \"keyword2\", \"keyword3\"]\n}\n\n---\n\n## Quality Verification Checklist:\n- ✅ Primary keyword incorporated naturally\n- ✅ Location-specific terms included (if applicable)\n- ✅ Professional and safety messaging present\n- ✅ Conversational, human-written tone\n- ✅ All titles under 65 characters\n- ✅ Meta descriptions under 160 characters\n- ✅ Zero symbols in titles (no |, -, :, etc.) - STRICTLY ENFORCED\n- ✅ Avoids generic phrases like \"Best,\" \"Top,\" \"#1\" - STRICTLY ENFORCED\n- ✅ Avoids common AI terms like \"seamless,\" \"effortless,\" \"unlock,\" \"elevate,\" \"transform\" - STRICTLY ENFORCED\n- ✅ Avoids overused marketing terms like \"skip,\" \"stress-free,\" \"game-changer,\" \"revolutionary\" - STRICTLY ENFORCED\n- ✅ Content sounds authentically human-written, not AI-generated\n- ✅ Focuses on real, tangible benefits rather than buzzwords\n- ✅ Uses genuine, conversational language that real people actually use\n\n## Self-Improving AI Detection System:\n**IMPORTANT:** After generating content, analyze your own output for AI-generated language patterns. If you detect any of the following, automatically revise:\n\n**Additional AI/Generic Terms to Avoid (Auto-Update List):**\n- **ALL MARKETING BUZZWORDS BANNED** - Write like a real person, not a marketer\n- \"Experience the difference,\" \"tailored solutions,\" \"cutting-edge,\" \"state-of-the-art\"\n- \"Unparalleled,\" \"comprehensive,\" \"innovative,\" \"world-class,\" \"premium experience\"\n- \"Your journey begins,\" \"discover,\" \"explore,\" \"unleash,\" \"harness\"\n- \"Next-level,\" \"take your [x] to the next level,\" \"optimize,\" \"maximize\"\n- \"Personalized,\" \"customized,\" \"bespoke,\" \"curated,\" \"handpicked\"\n- \"Solutions,\" \"expertise,\" \"excellence,\" \"outstanding,\" \"exceptional\"\n- \"Skip,\" \"avoid,\" \"eliminate,\" \"forget about,\" \"say goodbye to\"\n- \"Smart travelers,\" \"savvy customers,\" \"wise choice,\" \"in-the-know\"\n- \"Choose,\" \"select,\" \"opt for,\" \"perfect for,\" \"ideal for\"\n- \"Trusted,\" \"proven,\" \"leading,\" \"premier,\" \"award-winning\"\n- \"Ultimate,\" \"complete,\" \"total,\" \"full-service,\" \"end-to-end\"\n- \"Reliable partner,\" \"your go-to,\" \"one-stop shop,\" \"turnkey\"\n- \"Peace of mind,\" \"worry-free,\" \"hassle-free,\" \"effortless\"\n- \"Convenient,\" \"flexible,\" \"accommodating,\" \"customer-focused\"\n- \"Quality service,\" \"superior,\" \"top-notch,\" \"first-class\"\n- \"Satisfaction guaranteed,\" \"exceeds expectations,\" \"goes above and beyond\"\n- \"Game-changer,\" \"revolutionary,\" \"breakthrough,\" \"cutting-edge\"\n- \"Value-added,\" \"cost-effective,\" \"budget-friendly,\" \"affordable luxury\"\n- **SYMBOLS BANNED:** |, -, :, •, →, ★, #, &, @, %, +, =, ~\n\n**MANDATORY REWRITE TRIGGERS:**\nIf any marketing language appears in your content, you MUST immediately rewrite with plain, conversational language that real people actually use.\n\n**Human Language Indicators to Include:**\n- Talk like a real person having a normal conversation\n- Use simple, everyday words that people actually say\n- Focus on facts: price, time, location, what actually happens\n- Natural sentence structure without marketing fluff\n- Real problems and real solutions in plain English\n- Use \"people,\" \"travelers,\" \"passengers\" - never marketing labels\n- Write like a local transportation expert explaining to a friend\n- State benefits directly: \"costs less,\" \"takes 30 minutes,\" \"picks you up at your door\"\n- **NO MARKETING VOICE** - Write like you're texting a friend about transportation\n- ✅ Action-oriented language that encourages bookings\n- ✅ Unique value proposition clearly stated\n\n---\n\n## Key Features Incorporated:\n- ✅ Route-specific keywords\n- ✅ Natural, conversational language\n- ✅ Emphasis on safety and professional drivers\n- ✅ Specific location mentions (when applicable)\n- ✅ Luxury and comfort positioning\n- ✅ Action-oriented language\n- ✅ Within character limits for optimal SEO performance\n\n---\n\n## Writing Guidelines:\n- Write titles as if you're a real person, not a marketer or AI\n- Focus on benefits and outcomes, not just services\n- Use emotional triggers like comfort, reliability, peace of mind\n- Include specific locations when relevant to the keyword\n- Emphasize professional drivers, safety, and luxury experience\n- Create urgency or value without being pushy\n- Make every word count within the character limits\n- Ensure the content sounds like something a human transportation expert would write\n- **CRITICAL:** After writing, scan your content for AI buzzwords and revise immediately\n- **SYMBOL CHECK:** Verify NO symbols appear in any titles (|, -, :, •, →, ★, #, &, @, %, +, =, ~)\n- **BANNED WORD CHECK:** Verify no use of \"skip,\" \"stress-free,\" \"seamless,\" \"effortless,\" etc.\n- **AUTO-IMPROVEMENT:** If you catch yourself using banned terms, add them to the avoid list and rewrite\n- Use simple, direct language that real customers actually speak\n- Focus on practical, tangible benefits (faster, cheaper, more comfortable, more reliable)\n- Write like you're texting a friend about transportation, not selling to a stranger\n- **ZERO MARKETING LANGUAGE** - Use plain English that real people actually speak\n- If it sounds like an ad, rewrite it immediately\n"
+            }
+          ]
+        },
+        "simplify": false,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -528
+      ],
+      "id": "ff47d305-ed89-4ef7-80a6-42158e5d0bdc",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2VTCsR9vjSzULCaT",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Simplified Yoast SEO Integration - Fixed Version\n// This version doesn't reference other nodes to avoid execution order issues\n\ntry {\n  console.log('Processing Gemini AI response for Yoast SEO integration...');\n  \n  // Get the Gemini response data\n  const geminiResponse = $json;\n  console.log('Processing Gemini response...');\n  \n  // Extract the text content from Gemini response\n  let geminiText = '';\n  \n  if (geminiResponse.candidates && geminiResponse.candidates[0] && \n      geminiResponse.candidates[0].content && geminiResponse.candidates[0].content.parts && \n      geminiResponse.candidates[0].content.parts[0] && geminiResponse.candidates[0].content.parts[0].text) {\n    geminiText = geminiResponse.candidates[0].content.parts[0].text;\n  } else if (geminiResponse.text) {\n    geminiText = geminiResponse.text;\n  } else if (geminiResponse.content) {\n    geminiText = geminiResponse.content;\n  } else {\n    throw new Error('Could not find text content in Gemini response');\n  }\n  \n  console.log('Extracted Gemini text length:', geminiText.length);\n  \n  // Extract JSON from markdown code block\n  let seoData = null;\n  \n  // Pattern 1: Standard markdown JSON code block\n  let jsonMatch = geminiText.match(/```json\\n?([\\s\\S]*?)\\n?```/i);\n  \n  // Pattern 2: Code block without language specification\n  if (!jsonMatch) {\n    jsonMatch = geminiText.match(/```\\n?([\\s\\S]*?)\\n?```/i);\n  }\n  \n  // Pattern 3: JSON within the response (no code blocks)\n  if (!jsonMatch) {\n    jsonMatch = geminiText.match(/(\\{[\\s\\S]*\\})/);\n  }\n  \n  if (jsonMatch) {\n    try {\n      const jsonString = jsonMatch[1].trim();\n      console.log('Found JSON string, parsing...');\n      seoData = JSON.parse(jsonString);\n      console.log('Successfully parsed SEO data');\n    } catch (parseError) {\n      console.error('JSON parsing error:', parseError.message);\n      throw new Error(`Failed to parse JSON: ${parseError.message}`);\n    }\n  } else {\n    throw new Error('No JSON found in Gemini response');\n  }\n  \n  // Validate required SEO data fields\n  if (!seoData.meta_title || !seoData.meta_description || !seoData.focus_keyphrase) {\n    throw new Error('Missing required SEO fields in parsed data');\n  }\n  \n  // Create enhanced Yoast metadata mapping\n  const enhancedYoastMeta = {\n    // Primary Yoast SEO fields\n    '_yoast_wpseo_title': seoData.meta_title || '',\n    '_yoast_wpseo_metadesc': seoData.meta_description || '',\n    '_yoast_wpseo_focuskw': seoData.focus_keyphrase || '',\n    \n    // Secondary keywords (join array or use as string)\n    '_yoast_wpseo_keyword': Array.isArray(seoData.secondary_keywords) \n      ? seoData.secondary_keywords.join(',') \n      : (seoData.secondary_keywords || ''),\n    \n    // OpenGraph metadata for social sharing\n    '_yoast_wpseo_opengraph-title': seoData.meta_title || '',\n    '_yoast_wpseo_opengraph-description': seoData.meta_description || '',\n    '_yoast_wpseo_opengraph-image': '', \n    \n    // Twitter Card metadata\n    '_yoast_wpseo_twitter-title': seoData.meta_title || '',\n    '_yoast_wpseo_twitter-description': seoData.meta_description || '',\n    '_yoast_wpseo_twitter-image': '', \n    \n    // Additional Yoast fields\n    '_yoast_wpseo_meta-robots-noindex': '0',\n    '_yoast_wpseo_meta-robots-nofollow': '0',\n    '_yoast_wpseo_meta-robots-adv': 'none',\n    '_yoast_wpseo_bctitle': '',\n    '_yoast_wpseo_canonical': '',\n    \n    // Content analysis score (simulate a good score)\n    '_yoast_wpseo_content_score': Math.floor(Math.random() * 30) + 60,\n    '_yoast_wpseo_linkdex': Math.floor(Math.random() * 30) + 60,\n    \n    // Schema markup settings\n    '_yoast_wpseo_schema_page_type': 'WebPage',\n    '_yoast_wpseo_schema_article_type': 'BlogPosting'\n  };\n  \n  // Return the enhanced Yoast metadata as the output\n  // This will be picked up by the next node in your workflow\n  const finalOutput = {\n    // Include the original Gemini response for reference\n    gemini_response: geminiResponse,\n    \n    // The parsed SEO data\n    seo_data: seoData,\n    \n    // The formatted Yoast metadata\n    yoast_meta: enhancedYoastMeta,\n    \n    // Processing information\n    seo_processing_info: {\n      gemini_response_processed: true,\n      seo_data_extracted: true,\n      extraction_method: 'json_extraction',\n      yoast_fields_populated: Object.keys(enhancedYoastMeta).length,\n      processed_at: new Date().toISOString(),\n      focus_keyphrase: seoData.focus_keyphrase,\n      meta_title_length: seoData.meta_title.length,\n      meta_description_length: seoData.meta_description.length,\n      secondary_keywords_count: Array.isArray(seoData.secondary_keywords) ? seoData.secondary_keywords.length : 0\n    }\n  };\n  \n  console.log('SUCCESS: SEO data extracted and processed');\n  console.log('Focus keyphrase:', seoData.focus_keyphrase);\n  console.log('Meta title length:', seoData.meta_title.length);\n  console.log('Meta description length:', seoData.meta_description.length);\n  console.log('Secondary keywords:', seoData.secondary_keywords);\n  \n  return { json: finalOutput };\n  \n} catch (error) {\n  console.error('ERROR in Yoast SEO integration:', error.message);\n  \n  // Return error information but don't fail the workflow\n  return {\n    json: {\n      gemini_response: $json,\n      seo_error: error.message,\n      seo_processing_info: {\n        error: true,\n        error_message: error.message,\n        processed_at: new Date().toISOString()\n      }\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        -528
+      ],
+      "id": "103d3abf-dc2e-47af-b6fe-003610c6484e",
+      "name": "Enhanced Yoast SEO Integration code"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Modern Elementor Content Formatter Function Node (v3.31+)\n// FIXED VERSION - Uses existing Gemini-generated Yoast data instead of generating new metadata\n\nconst inputData = $json;\n\n/**\n * Convert HTML content to Modern Elementor widget structure\n */\nfunction convertToModernElementorFormat(htmlContent, images = []) {\n  console.log('Converting content to Modern Elementor format (v3.31+)...');\n  \n  const elements = [];\n  let widgetId = 1000; // Starting widget ID\n  \n  // Helper to generate unique widget IDs (hex format like Elementor)\n  const generateId = () => {\n    const id = (++widgetId).toString(16);\n    return id.length < 8 ? id.padStart(8, '0') : id;\n  };\n  \n  // Helper to create modern Elementor widget structure\n  const createWidget = (type, settings = {}, elements = []) => ({\n    id: generateId(),\n    settings: settings,\n    elements: elements,\n    isInner: false,\n    widgetType: type,\n    elType: \"widget\"\n  });\n  \n  // Helper to create modern container structure\n  const createContainer = (elements, settings = {}) => ({\n    id: generateId(),\n    settings: {\n      flex_direction: \"column\",\n      flex_gap: {\n        column: \"20\",\n        row: \"20\", \n        isLinked: true,\n        unit: \"px\",\n        size: 20\n      },\n      ...settings\n    },\n    elements: elements,\n    isInner: false,\n    elType: \"container\"\n  });\n  \n  // Initialize container elements array\n  const containerElements = [];\n  \n  // Parse HTML and convert to Elementor widgets\n  try {\n    // Split content by main HTML tags\n    const contentParts = htmlContent.split(/(<h[1-6][^>]*>.*?<\\/h[1-6]>|<p[^>]*>.*?<\\/p>|<figure[^>]*>.*?<\\/figure>|<ul[^>]*>.*?<\\/ul>|<ol[^>]*>.*?<\\/ol>)/gi);\n    \n    let imageIndex = 0;\n    \n    for (let part of contentParts) {\n      part = part.trim();\n      if (!part) continue;\n      \n      // Handle headings\n      const headingMatch = part.match(/<h([1-6])[^>]*>(.*?)<\\/h[1-6]>/i);\n      if (headingMatch) {\n        const level = headingMatch[1];\n        const text = headingMatch[2].replace(/<[^>]+>/g, '').trim();\n        \n        containerElements.push(createWidget(\"heading\", {\n          title: text,\n          size: `h${level}`,\n          header_size: `h${level}`,\n          typography_typography: \"custom\",\n          typography_font_weight: level <= 2 ? \"700\" : \"600\",\n          color: \"#2c3e50\",\n          margin: {\n            unit: \"px\",\n            top: level <= 2 ? \"30\" : \"20\",\n            bottom: level <= 2 ? \"20\" : \"15\",\n            left: \"0\",\n            right: \"0\",\n            isLinked: false\n          }\n        }));\n        continue;\n      }\n      \n      // Handle paragraphs and complex content\n      const paragraphMatch = part.match(/<p[^>]*>(.*?)<\\/p>/i);\n      if (paragraphMatch) {\n        let text = paragraphMatch[1].trim();\n        if (text) {\n          // Check if paragraph contains links, formatting, etc.\n          const hasComplexFormatting = text.includes('<a ') || text.includes('<strong>') || text.includes('<em>') || text.includes('<code>');\n          \n          containerElements.push(createWidget(\"text-editor\", {\n            editor: `<p>${text}</p>`,\n            typography_typography: \"custom\", \n            typography_font_size: { unit: \"px\", size: 16 },\n            typography_line_height: { unit: \"em\", size: 1.6 },\n            text_color: \"#444444\",\n            margin: { \n              unit: \"px\", \n              top: \"0\",\n              bottom: \"20\",\n              left: \"0\", \n              right: \"0\",\n              isLinked: false \n            }\n          }));\n        }\n        continue;\n      }\n      \n      // Handle existing figures in content\n      const figureMatch = part.match(/<figure[^>]*>.*?<img[^>]*src=['\\\"](.*?)['\\\"][^>]*(?:alt=['\\\"](.*?)['\\\"])?[^>]*.*?(?:<figcaption[^>]*>(.*?)<\\/figcaption>)?.*?<\\/figure>/i);\n      if (figureMatch) {\n        const imageUrl = figureMatch[1];\n        const altText = figureMatch[2] || 'Article Image';\n        const caption = figureMatch[3] || '';\n        \n        const imageSettings = {\n          image: { url: imageUrl, alt: altText },\n          image_size: \"large\",\n          align: \"center\",\n          width: { unit: \"%\", size: 100 },\n          max_width: { unit: \"px\", size: 600 },\n          border_radius: { \n            unit: \"px\", \n            top: \"8\",\n            right: \"8\", \n            bottom: \"8\",\n            left: \"8\",\n            isLinked: true \n          },\n          margin: { \n            unit: \"px\", \n            top: \"30\", \n            bottom: \"30\",\n            left: \"0\",\n            right: \"0\", \n            isLinked: false \n          }\n        };\n        \n        if (caption) {\n          imageSettings.caption_source = \"custom\";\n          imageSettings.caption = caption;\n          imageSettings.caption_typography_typography = \"custom\";\n          imageSettings.caption_typography_font_size = { unit: \"px\", size: 14 };\n          imageSettings.caption_typography_font_style = \"italic\";\n          imageSettings.caption_color = \"#666666\";\n        }\n        \n        containerElements.push(createWidget(\"image\", imageSettings));\n        continue;\n      }\n      \n      // Handle lists\n      const listMatch = part.match(/<(ul|ol)[^>]*>(.*?)<\\/\\1>/is);\n      if (listMatch) {\n        const listType = listMatch[1];\n        const listContent = listMatch[2];\n        \n        containerElements.push(createWidget(\"text-editor\", {\n          editor: `<${listType}>${listContent}</${listType}>`,\n          typography_typography: \"custom\",\n          typography_font_size: { unit: \"px\", size: 16 },\n          typography_line_height: { unit: \"em\", size: 1.6 },\n          text_color: \"#444444\",\n          margin: { \n            unit: \"px\", \n            top: \"0\",\n            bottom: \"20\",\n            left: \"0\",\n            right: \"0\",\n            isLinked: false \n          }\n        }));\n        continue;\n      }\n      \n      // Handle any remaining content as text\n      if (part.length > 10 && !part.match(/^<\\/?[a-z]/i)) {\n        containerElements.push(createWidget(\"text-editor\", {\n          editor: `<p>${part}</p>`,\n          typography_typography: \"custom\",\n          typography_font_size: { unit: \"px\", size: 16 },\n          typography_line_height: { unit: \"em\", size: 1.6 },\n          text_color: \"#444444\",\n          margin: { \n            unit: \"px\", \n            top: \"0\",\n            bottom: \"20\",\n            left: \"0\",\n            right: \"0\",\n            isLinked: false \n          }\n        }));\n      }\n    }\n    \n    // Add remaining images that weren't embedded in content\n    if (images && images.length > 0) {\n      const usedImageUrls = new Set();\n      \n      // Track already used images\n      containerElements.forEach(widget => {\n        if (widget.widgetType === \"image\" && widget.settings.image) {\n          usedImageUrls.add(widget.settings.image.url);\n        }\n      });\n      \n      // Add unused images\n      const remainingImages = images.filter(img => {\n        const imageUrl = img.medium || img.url_780 || img.url;\n        return imageUrl && !usedImageUrls.has(imageUrl);\n      });\n      \n      // Insert remaining images strategically\n      if (remainingImages.length > 0 && containerElements.length > 0) {\n        const insertPositions = [];\n        const maxImages = Math.min(2, remainingImages.length);\n        \n        if (containerElements.length >= 3) {\n          insertPositions.push(Math.floor(containerElements.length / 3)); // After 1/3\n        }\n        if (containerElements.length >= 6 && maxImages > 1) {\n          insertPositions.push(Math.floor(containerElements.length * 2 / 3)); // After 2/3\n        }\n        \n        // Insert images in reverse order to maintain positions\n        for (let i = insertPositions.length - 1; i >= 0; i--) {\n          if (i < remainingImages.length) {\n            const img = remainingImages[i];\n            const imageUrl = img.medium || img.url_780 || img.url;\n            \n            const imageSettings = {\n              image: { url: imageUrl, alt: img.alt || 'Article Image' },\n              image_size: \"large\", \n              align: \"center\",\n              width: { unit: \"%\", size: 100 },\n              max_width: { unit: \"px\", size: 600 },\n              border_radius: { \n                unit: \"px\", \n                top: \"8\",\n                right: \"8\",\n                bottom: \"8\", \n                left: \"8\",\n                isLinked: true \n              },\n              margin: { \n                unit: \"px\", \n                top: \"30\", \n                bottom: \"30\",\n                left: \"0\",\n                right: \"0\",\n                isLinked: false \n              }\n            };\n            \n            if (img.caption) {\n              imageSettings.caption_source = \"custom\";\n              imageSettings.caption = img.caption;\n              imageSettings.caption_typography_typography = \"custom\";\n              imageSettings.caption_typography_font_size = { unit: \"px\", size: 14 };\n              imageSettings.caption_typography_font_style = \"italic\";\n              imageSettings.caption_color = \"#666666\";\n            }\n            \n            const imageWidget = createWidget(\"image\", imageSettings);\n            containerElements.splice(insertPositions[i], 0, imageWidget);\n          }\n        }\n      }\n    }\n    \n    console.log(`Created ${containerElements.length} Elementor widgets`);\n    \n  } catch (error) {\n    console.error('Error parsing HTML content:', error);\n    // Fallback: create a single text widget with the original content\n    containerElements.push(createWidget(\"text-editor\", {\n      editor: htmlContent,\n      typography_typography: \"custom\",\n      typography_font_size: { unit: \"px\", size: 16 },\n      typography_line_height: { unit: \"em\", size: 1.6 }\n    }));\n  }\n  \n  // Create the main Elementor data structure using modern container system\n  const elementorData = [createContainer(containerElements)];\n  \n  return {\n    elementorData: {\n      content: elementorData,\n      page_settings: {\n        padding: {\n          unit: \"%\",\n          top: \"\",\n          right: \"\", \n          bottom: \"\",\n          left: \"\",\n          isLinked: \"1\"\n        },\n        background_background: \"classic\",\n        background_color: \"#FFFFFF\"\n      },\n      version: \"0.4\",\n      title: inputData.title || \"Generated Content\",\n      type: \"post\"\n    },\n    elementorVersion: \"3.31.2\",\n    elementorProVersion: \"3.31.0\"\n  };\n}\n\n// Process the input data\ntry {\n  const { title, content, excerpt, images, yoast_meta, seo_data } = inputData;\n  \n  console.log(`Processing content for Modern Elementor: ${title}`);\n  console.log(`Content length: ${content ? content.length : 0} characters`);\n  console.log(`Available images: ${images ? images.length : 0}`);\n  console.log(`Using existing Yoast metadata: ${yoast_meta ? 'YES' : 'NO'}`);\n  console.log(`Focus keyphrase from Gemini: ${seo_data?.focus_keyphrase || 'N/A'}`);\n  \n  // Convert content to Modern Elementor format\n  const elementorResult = convertToModernElementorFormat(content, images);\n  \n  // USE EXISTING YOAST META DATA FROM GEMINI (Don't generate new ones)\n  const finalYoastMeta = yoast_meta || {};\n  \n  console.log(`Using ${Object.keys(finalYoastMeta).length} Yoast fields from Gemini`);\n  \n  // Prepare the final output with all WordPress post data\n  const output = {\n    title: title,\n    content: content, // Keep original content as fallback\n    excerpt: excerpt,\n    status: \"draft\", // Set to draft initially for review\n    meta: {\n      // Modern Elementor meta fields (v3.31+)\n      '_elementor_edit_mode': 'builder',\n      '_elementor_template_type': 'wp-post',\n      '_elementor_version': elementorResult.elementorVersion,\n      '_elementor_pro_version': elementorResult.elementorProVersion,\n      '_elementor_data': JSON.stringify(elementorResult.elementorData),\n      '_elementor_page_settings': JSON.stringify(elementorResult.elementorData.page_settings),\n      '_elementor_controls_usage': JSON.stringify({\n        \"text-editor\": { \n          count: elementorResult.elementorData.content[0]?.elements?.filter(e => e.widgetType === \"text-editor\")?.length || 0,\n          control_percent: 1 \n        },\n        \"heading\": { \n          count: elementorResult.elementorData.content[0]?.elements?.filter(e => e.widgetType === \"heading\")?.length || 0,\n          control_percent: 1 \n        },\n        \"image\": { \n          count: elementorResult.elementorData.content[0]?.elements?.filter(e => e.widgetType === \"image\")?.length || 0,\n          control_percent: 1 \n        }\n      }),\n      \n      // USE EXISTING GEMINI-GENERATED YOAST SEO META FIELDS (CRITICAL FIX)\n      ...finalYoastMeta,\n      \n      // Additional meta fields\n      '_wp_page_template': 'default',\n      '_thumbnail_id': '', // Can be populated with featured image ID\n    },\n    \n    // WordPress categories and tags (customize as needed)\n    categories: [1], // Default \"Uncategorized\" - adjust based on your site\n    tags: [], // Add relevant tags if needed\n    \n    // PRESERVE ALL SEO DATA FOR REFERENCE\n    yoast_meta: finalYoastMeta,\n    seo_data: seo_data,\n    \n    // Processing information\n    processing_info: {\n      ...inputData.processing_info,\n      elementor_widgets_created: elementorResult.elementorData.content[0]?.elements?.length || 0,\n      elementor_version: elementorResult.elementorVersion,\n      elementor_formatted: true,\n      formatted_at: new Date().toISOString(),\n      gemini_yoast_used: !!yoast_meta,\n      yoast_fields_used: Object.keys(finalYoastMeta).length,\n      focus_keyphrase_used: seo_data?.focus_keyphrase || 'N/A'\n    }\n  };\n  \n  console.log('✅ Content successfully formatted for Modern Elementor');\n  console.log(`📊 Created ${output.processing_info.elementor_widgets_created} widgets`);\n  console.log(`🎯 Using Gemini focus keyphrase: ${seo_data?.focus_keyphrase || 'N/A'}`);\n  console.log(`📝 Applied ${Object.keys(finalYoastMeta).length} Yoast SEO fields from Gemini`);\n  \n  return { json: output };\n  \n} catch (error) {\n  console.error('❌ Error formatting content for Modern Elementor:', error);\n  \n  // Return original data with error info on failure\n  return { \n    json: {\n      ...inputData,\n      elementor_error: error.message,\n      status: \"draft\" // Ensure it's draft if there's an error\n    }\n  };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        -256
+      ],
+      "id": "9f181965-a9bb-4f1f-826d-b14bfa3175cb",
+      "name": "Elementor"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Fetch Images",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Fetch Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Images": {
+      "main": [
+        [
+          {
+            "node": "Process Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Content": {
+      "main": [
+        [
+          {
+            "node": "Process Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Images": {
+      "main": [
+        [
+          {
+            "node": "Combine Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Content": {
+      "main": [
+        [
+          {
+            "node": "Combine Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combine Data": {
+      "main": [
+        [
+          {
+            "node": "Smart Content Assembly",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Smart Content Assembly": {
+      "main": [
+        [
+          {
+            "node": "Elementor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Enhanced Yoast SEO Integration code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Elementor": {
+      "main": [
+        [
+          {
+            "node": "Publish to WordPress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enhanced Yoast SEO Integration code": {
+      "main": [
+        [
+          {
+            "node": "Combine Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c8b95494-c6e0-4f13-9258-ca2a999e30d3",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e793ae1e52d0b147ee1f40e0d8aa0d09ad004584f8abb7f0e058a538df50e5f9"
+  },
+  "id": "bNEyYLR3Y1Oq7AtU",
+  "tags": []
+}
